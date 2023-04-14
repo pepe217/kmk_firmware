@@ -25,4 +25,6 @@ pinout = [
     None,  # RST
     None,  # GND
     None,  # RAW
+    board.SCL,
+    board.SDA,
 ]
