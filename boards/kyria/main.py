@@ -214,13 +214,13 @@ qdfs = simple_key_sequence(
 qdc = simple_key_sequence(
         (
             qd_start_seq,
-            KC.LCTL(KC.S)
+            KC.LCTL(KC.C)
         )
     )
 qdcs = simple_key_sequence(
         (
             qd_start_seq,
-            CTLSFT(KC.S)
+            CTLSFT(KC.C)
         )
     )
 qdw = simple_key_sequence(
@@ -646,6 +646,14 @@ savef = simple_key_sequence(
         KC.TG(3)
     )
 ) 
+#open QD alignment and goto text layer
+align = simple_key_sequence(
+        (
+            qd_start_seq,
+            KC.LCTL(KC.C),
+            KC.TG(5)
+        )
+    )
 
 keyboard.keymap = [
     # base
@@ -657,10 +665,10 @@ keyboard.keymap = [
     ],
     # keypad/function
     [
-        KC.TRNS,  KC.PMNS, KC.N7, KC.N8,   KC.N9,   KC.PSLS,                                                         KC.HOME, KC.F1,   KC.F2,  KC.F3,  KC.F4,  KC.PGUP,
-        KC.TRNS,  KC.PDOT, KC.N4, KC.N5,   KC.N6,   KC.PAST,                                                         KC.END,  KC.F7,   KC.F6,  KC.F7,  KC.F8,  KC.PGDN,
-        KC.TRNS,  KC.KPEQ, KC.N1, KC.N2,   KC.N3,   KC.PPLS, KC.TRNS, KC.TD(KC.TG(1), KC.TO(0)),   KC.TRNS, KC.TRNS, KC.TRNS, KC.F9,   KC.F10, KC.F11, KC.F12, KC.PSCR,
-                                  KC.P0,   KC.PDOT, KC.BSPC, KC.KPEQ, KC.TRNS,                     CTLSFT,  KC.TRNS, KC.LALT, KC.TRNS, KC.TRNS
+        KC.TRNS,  KC.PMNS, KC.N7, KC.N8,   KC.N9,   KC.PSLS,                                                               KC.HOME, KC.F1,   KC.F2,  KC.F3,  KC.F4,  KC.PGUP,
+        KC.TRNS,  KC.PDOT, KC.N4, KC.N5,   KC.N6,   KC.PAST,                                                               KC.END,  KC.F7,   KC.F6,  KC.F7,  KC.F8,  KC.PGDN,
+        KC.TRNS,  KC.KPEQ, KC.N1, KC.N2,   KC.N3,   KC.PPLS, KC.TRNS, KC.TD(KC.TG(1), KC.TO(0)),   KC.TRNS,       KC.TRNS, KC.TRNS, KC.F9,   KC.F10, KC.F11, KC.F12, KC.PSCR,
+                                  KC.P0,   KC.PDOT, KC.BSPC, KC.KPEQ, KC.TRNS,                     KC.OS(CTLSFT), KC.TRNS, KC.LALT, KC.TRNS, KC.TRNS
     ],
     # symbols
     [
@@ -671,24 +679,24 @@ keyboard.keymap = [
     ],
     # navigation
     [
-        KC.LCTL(KC.L), MV10L,   MV10R,         MV10D,         MV10U,         undtab,                                                         undtab, MV10U,         MV10D,         MV10R,         MV10L, KC.LCTL(KC.L),  
-        KC.LCTL(KC.Z), KC.LEFT, KC.RGHT,       KC.DOWN,       KC.UP,         rename,                                                          rename,  KC.UP,         KC.DOWN,       KC.RGHT,       KC.LEFT, KC.LCTL(KC.Z),  
-        openf,         undo,    KC.LCTL(KC.X), KC.LCTL(KC.C), KC.TD(paste, pastee),         savef,         KC.TRNS, KC.TD(KC.TG(3), KC.TO(0)),   KC.TRNS, KC.TRNS, savef,         paste,         KC.LCTL(KC.C), KC.LCTL(KC.X), undo,  openf,  
-                                               KC.TRNS,       KC.LCTL(KC.V), KC.TRNS,       KC.TRNS, KC.TRNS,                     KC.TRNS, KC.TRNS, KC.TRNS,       KC.TRNS, KC.LCTL(KC.V)  
+        KC.LCTL(KC.L), MV10L,   MV10R,         MV10D,         MV10U,                undtab,                                                          undtab,  MV10U,   MV10D,         MV10R,         MV10L,   KC.LCTL(KC.L),  
+        KC.LCTL(KC.Z), KC.LEFT, KC.RGHT,       KC.DOWN,       KC.UP,                rename,                                                          rename,  KC.UP,   KC.DOWN,       KC.RGHT,       KC.LEFT, KC.LCTL(KC.Z),  
+        openf,         undo,    KC.LCTL(KC.X), KC.LCTL(KC.C), KC.TD(paste, pastee), savef,   KC.TRNS, KC.TD(KC.TG(3), KC.TO(0)),   KC.TRNS, KC.TRNS, savef,   paste,   KC.LCTL(KC.C), KC.LCTL(KC.X), undo,    openf,  
+                                               KC.TRNS,       KC.LCTL(KC.V),        KC.TRNS, KC.TRNS, KC.TRNS,                     KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.LCTL(KC.V)  
     ],
     # labview text
     [
-        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS,KC.TRNS,  KC.TRNS,                                                                KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
-        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS,KC.TRNS,  KC.TRNS,                                                                KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
-        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS,KC.TRNS,  KC.TRNS, KC.TRNS,KC.DOWN,                 qdwl,    KC.TD(qdvsr,qdvsrs), KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
-                                      KC.UP,  escqd,    KC.TRNS, qdins,  qdm1,                    KC.TRNS, qdins,               KC.TRNS, KC.TRNS, qdgit 
+        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS,          KC.TRNS,  KC.TRNS,                                                  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
+        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS,          KC.TRNS,  KC.TRNS,                                                  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
+        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS,          KC.TRNS,  KC.TRNS, qdins, KC.UP,      qdwl,    KC.TD(qdvsr,qdvsrs), KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
+                                      KC.OS(KC.MO(2)),  escqd,    KC.TRNS, qdm1,  KC.DOWN,    KC.TRNS, qdins,               KC.TRNS, KC.TRNS, qdgit 
     ],
     # labview macros
     [
-        KC.TD(qdg,qdm), KC.TD(qdq,qd1,qd1s), KC.TD(qdw,qdy),               KC.TD(qdf,qdl,qdls), KC.TD(qdp,qdps,qdu), KC.TD(qdb,qdj),                                                                                                   KC.LCTL(KC.O), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F), KC.LCTL(KC.L),  
-        KC.TD(qdv,qdk), KC.TD(qda,qd0,qdo),  KC.TD(qdr,qdrs,qdreq,qdreqs), KC.TD(qds,qdss,qde), KC.TD(qdt,qdts,qdn), CTLOS,                                                                                                            CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.ENT), KC.LCTL(KC.H),  
-        KC.TD(qd2,qd5), KC.TD(qdz,qd4,qd7),  KC.TD(qdx,qd3,qd8),           KC.TD(qdc,qd6,qd9),  KC.TD(qdd,qdds,qdh), CLPSE,                 KC.TD(KC.LCTL(KC.U),  KC.LCTL(KC.B)),   KC.TD(KC.TG(3),KC.TG(1)),  KC.TRNS,      KC.TO(0), KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z), KC.LCTL(KC.S),  
-                                                                           KC.LCTL(KC.R),       KC.ESC,              KC.TD(KC.BSPC,delcln), qdtxt,                                  KC.LCTL(KC.E),             CTLSFT(KC.G), KC.TRNS,  KC.LCTL(KC.G), KC.TRNS,        CTLSFT(KC.Z)   
+        KC.TD(qdg,qdm), KC.TD(qdq,qd1,qd1s),     KC.TD(qdw,qdy,qd9),                   KC.TD(qdf,qdl,qdls), KC.TD(qdp,qdps,qdu), KC.TD(qdb,qdj,qd6),                                                                             KC.LCTL(KC.O), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F),   KC.LCTL(KC.L),  
+        KC.TD(qdv,qdk), KC.TD(qda,qdas,qd0,qdo), KC.TD(KC.LCTL(KC.U),  KC.LCTL(KC.B)), CTLOS,               qdtxt,               KC.TD(qdr,qdrs,qdreq,qdreqs),                                                                   CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.ENT), KC.LCTL(KC.H),  
+        KC.TD(qd2,qd5), KC.TD(qdz,qd4,qd7),      KC.TD(qdx,qd3,qd8),                   CLPSE,               KC.TD(qdd,qdds,qdh), align,                         KC.TD(qds,qdss,qde), KC.TG(1),           KC.TRNS,      KC.TO(0), KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z),   KC.LCTL(KC.S),  
+                                                                                       KC.LCTL(KC.R),       KC.ESC,              KC.TD(KC.BSPC,delcln),         KC.TG(3),            KC.LCTL(KC.E),      CTLSFT(KC.G), KC.TRNS,  KC.LCTL(KC.G), KC.TRNS,        CTLSFT(KC.Z)   
     ],
 ]
 
