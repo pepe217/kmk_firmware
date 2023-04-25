@@ -10,6 +10,7 @@ from kmk.modules.capsword import CapsWord
 from kmk.modules.split import Split, SplitType, SplitSide
 from kmk.modules.oneshot import OneShot
 from kmk.modules.mouse_keys import MouseKeys
+from kmk.modules.combos import Chord, Combos
 from storage import getmount
 from kmk.handlers.sequences import simple_key_sequence
 
@@ -47,7 +48,8 @@ else:
 
 keyboard.extensions.append(rgb)
 
-
+combos = Combos()
+keyboard.modules.append(combos)
 tapdance = TapDance()
 tapdance.tap_time = 250
 keyboard.modules.append(tapdance)
@@ -69,11 +71,20 @@ keyboard.modules.append(split)
 
 # General macros
 SFTOS = KC.OS(KC.LSHIFT, tap_time=None)
-GUIOS = KC.OS(KC.LM(2, KC.LGUI))
-CTLOS = KC.OS(KC.LCTL)
-ALTOS = KC.OS(KC.LALT)
+GUIOS = KC.MT(KC.OS(KC.LM(2, KC.LGUI)), KC.LGUI)
+CTLOS = KC.OS(KC.LCTL, tap_time=None)
+ALTOS = KC.OS(KC.LALT, tap_time=None)
 CTLSFT = KC.LSHIFT(KC.LCTL)
-CMDSFT = KC.LSHIFT(KC.LGUI)
+OS_LCTL_LSFT = KC.OS(KC.LCTL(SFTOS), tap_time=None)
+OS_LCTL_LALT = KC.OS(KC.LCTL(ALTOS), tap_time=None)
+OS_LSFT_LALT = KC.OS(KC.LSFT(ALTOS), tap_time=None)
+OS_LCTL_LSFT_LALT = KC.OS(KC.LCTL(KC.LSFT(ALTOS)), tap_time=None)
+combos.combos = [
+	Chord((CTLOS, SFTOS), OS_LCTL_LSFT, timeout=1000),
+    Chord((CTLOS, ALTOS), OS_LCTL_LALT, timeout=1000),
+    Chord((SFTOS, ALTOS), OS_LSFT_LALT, timeout=1000),
+    Chord((CTLOS, SFTOS, ALTOS), OS_LCTL_LSFT_LALT, timeout=1000),
+]
 COLON = KC.TD(KC.COLON, KC.SCLN, KC.CW)
 BRACES = KC.TD(KC.LBRC, KC.RBRC)
 CBRACES = KC.TD(KC.LCBR, KC.RCBR)
@@ -83,8 +94,18 @@ MINSU = KC.TD(KC.MINS, KC.UNDS)
 QUES = KC.TD(KC.SLSH, KC.QUES)
 PERD = KC.TD(KC.DOT, KC.RABK)
 COMMA = KC.TD(KC.COMM, KC.LABK)
-rename = simple_key_sequence((KC.F2, KC.TG(3)))
-undtab = simple_key_sequence((CTLSFT(KC.T)))
+rename = simple_key_sequence(
+	    (
+	        KC.F2,
+	        KC.TG(3)
+	    )
+	)
+undtab = simple_key_sequence(
+	    (
+	        CTLSFT(KC.T),
+	        KC.TG(3)
+	    )
+    )
 QUOTS = KC.TD(KC.QUOT, KC.DQT)
 #labview specific macros
 LVLYR = simple_key_sequence((KC.TG(4), KC.TG(5)))
@@ -92,9 +113,13 @@ MV10L = KC.LSHIFT(KC.LEFT)
 MV10U = KC.LSHIFT(KC.UP)
 MV10D = KC.LSHIFT(KC.DOWN)
 MV10R = KC.LSHIFT(KC.RIGHT)
+EXPND = KC.OS(KC.LCTL)
 CLPSE = KC.OS(KC.LCTL(KC.LALT))
 QD = KC.LCTL(KC.SPACE)
-qd_start_seq = simple_key_sequence((QD, KC.MACRO_SLEEP_MS(100)
+qd_start_seq = simple_key_sequence(
+	    (
+	        QD,
+	        KC.MACRO_SLEEP_MS(100)
         )
     )
 qdreq = simple_key_sequence(
@@ -145,48 +170,48 @@ qdt = simple_key_sequence(
             KC.LCTL(KC.T)
         )
     )
-qdts = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.T)
-        )
-    )
+# qdts = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.T)
+#         )
+#     )
 qdv = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.V)
         )
     )
-qdvs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.V)
-        )
-    )
+# qdvs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.V)
+#         )
+#     )
 qdg = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.G)
         )
     )
-qdgs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.G)
-        )
-    )
+# qdgs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.G)
+#         )
+#     )
 qdb = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.B)
         )
     )
-qdbs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.B)
-        )
-    )
+# qdbs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.B)
+#         )
+#     )
 qdp = simple_key_sequence(
         (
             qd_start_seq,
@@ -205,60 +230,60 @@ qdf = simple_key_sequence(
             KC.LCTL(KC.F)
         )
     )
-qdfs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.F)
-        )
-    )
-qdc = simple_key_sequence(
-        (
-            qd_start_seq,
-            KC.LCTL(KC.C)
-        )
-    )
-qdcs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.C)
-        )
-    )
+# qdfs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.F)
+#         )
+#     )
+# qdc = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             KC.LCTL(KC.C)
+#         )
+#     )
+# qdcs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.C)
+#         )
+#     )
 qdw = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.W)
         )
     )
-qdws = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.W)
-        )
-    )
+# qdws = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.W)
+#         )
+#     )
 qdx = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.X)
         )
     )
-qdxs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.X)
-        )
-    )
+# qdxs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.X)
+#         )
+#     )
 qdq = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.Q)
         )
     )
-qdqs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.Q)
-        )
-    )
+# qdqs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.Q)
+#         )
+#     )
 qda = simple_key_sequence(
         (
             qd_start_seq,
@@ -277,12 +302,12 @@ qdz = simple_key_sequence(
             KC.LCTL(KC.Z)
         )
     )
-qdzs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.Z)
-        )
-    )
+# qdzs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.Z)
+#         )
+#     )
 qd1 = simple_key_sequence(
         (
             qd_start_seq,
@@ -373,108 +398,108 @@ qd8 = simple_key_sequence(
             KC.LCTL(KC.N8)
         )
     )
-qd8s = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.N8)
-        )
-    )
+# qd8s = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.N8)
+#         )
+#     )
 qd9 = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.N9)
         )
     )
-qd9s = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.N9)
-        )
-    )
+# qd9s = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.N9)
+#         )
+#     )
 qd0 = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.N0)
         )
     )
-qd0s = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.N0)
-        )
-    )
+# qd0s = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.N0)
+#         )
+#     )
 qdj = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.J)
         )
     )
-qdjs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.J)
-        )
-    )
+# qdjs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.J)
+#         )
+#     )
 qdm = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.M)
         )
     )
-qdms = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.M)
-        )
-    )
+# qdms = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.M)
+#         )
+#     )
 qdk = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.K)
         )
     )
-qdks = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.K)
-        )
-    )
+# qdks = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.K)
+#         )
+#     )
 qdl = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.L)
         )
     )
-qdls = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.L)
-        )
-    )
+# qdls = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.L)
+#         )
+#     )
 qdn = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.N)
         )
     )
-qdns = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.N)
-        )
-    )
+# qdns = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.N)
+#         )
+#     )
 qdh = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.H)
         )
     )
-qdhs = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.H)
-        )
-    )
+# qdhs = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.H)
+#         )
+#     )
 qdu = simple_key_sequence(
         (
             qd_start_seq,
@@ -493,12 +518,12 @@ qde = simple_key_sequence(
             KC.LCTL(KC.E)
         )
     )
-qdes = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.E)
-        )
-    )
+# qdes = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.E)
+#         )
+#     )
 qdy = simple_key_sequence(
         (
             qd_start_seq,
@@ -517,24 +542,24 @@ qdi = simple_key_sequence(
             KC.LCTL(KC.I)
         )
     )
-qdis = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.I)
-        )
-    )
+# qdis = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.I)
+#         )
+#     )
 qdo = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.O)
         )
     )
-qdos = simple_key_sequence(
-        (
-            qd_start_seq,
-            CTLSFT(KC.O)
-        )
-    )
+# qdos = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             CTLSFT(KC.O)
+#         )
+#     )
 qds = simple_key_sequence(
         (
             qd_start_seq,
@@ -687,15 +712,15 @@ keyboard.keymap = [
     [
         ALTOS,  KC.Q,  KC.W,    KC.F,  KC.P,    KC.B,                                                 KC.J,   KC.L,   KC.U,    KC.Y,   QUOTS,  MINSU,
         CTLOS,  KC.A,  KC.R,    KC.S,  KC.T,    KC.G,                                                 KC.M,   KC.N,   KC.E,    KC.I,   KC.O,    EQLADD,
-        PRN,    KC.Z,  KC.X,    KC.C,  KC.D,    KC.V,    KC.OS(KC.MO(2)), LVLYR,    COLON,   KC.TAB,  KC.K,   KC.H,   COMMA,   PERD,   QUES,    BRACES,
-                                GUIOS, KC.ESC,  KC.BSPC, KC.TG(3),        KC.TG(1), SFTOS,   KC.ENT,  KC.SPC, KC.DEL, CBRACES 
+        PRN,    KC.Z,  KC.X,    KC.C,  KC.D,    KC.V,    KC.OS(KC.MO(2)), LVLYR,    COLON,   SFTOS,   KC.K,   KC.H,   COMMA,   PERD,   QUES,    BRACES,
+                                GUIOS, KC.ESC,  KC.BSPC, KC.TG(3),        KC.TG(1), KC.TAB,  KC.ENT,  KC.SPC, KC.DEL, CBRACES 
     ],
     # keypad/function
     [
-        KC.TRNS,  KC.PMNS, KC.N7, KC.N8,   KC.N9,   KC.PSLS,                                               KC.HOME, KC.F1,   KC.F2,  KC.F3,  KC.F4,  KC.PGUP,
-        KC.TRNS,  KC.PDOT, KC.N4, KC.N5,   KC.N6,   KC.PAST,                                              KC.END,  KC.F5,   KC.F6,  KC.F7,  KC.F8,  KC.PGDN,
-        KC.TRNS,  KC.KPEQ, KC.N1, KC.N2,   KC.N3,   KC.PPLS, KC.TRNS, KC.TG(1),   KC.OS(CTLSFT), KC.TRNS, KC.TRNS, KC.F9,   KC.F10, KC.F11, KC.F12, KC.PSCR,
-                                  KC.P0,   KC.PDOT, KC.BSPC, KC.TRNS, KC.TRNS,    KC.TRNS,       KC.TRNS, KC.LALT, KC.TRNS, KC.TRNS
+        KC.TRNS,  KC.PMNS, KC.N7, KC.N8,   KC.N9,   KC.PSLS,                                        KC.HOME, KC.F1,   KC.F2,  KC.F3,  KC.F4,  KC.PGUP,
+        KC.TRNS,  KC.PDOT, KC.N4, KC.N5,   KC.N6,   KC.PAST,                                        KC.END,  KC.F5,   KC.F6,  KC.F7,  KC.F8,  KC.PGDN,
+        KC.TRNS,  KC.KPEQ, KC.N1, KC.N2,   KC.N3,   KC.PPLS, KC.TRNS, KC.TG(1),   KC.TRNS, KC.TRNS, KC.TRNS, KC.F9,   KC.F10, KC.F11, KC.F12, KC.PSCR,
+                                  KC.P0,   KC.PDOT, KC.BSPC, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.LALT, KC.TRNS, KC.TRNS
     ],
     # symbols
     [
@@ -713,16 +738,16 @@ keyboard.keymap = [
     ],
     # labview text
     [
-        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS,                                            KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
-        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS,                                            KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
-        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS, KC.OS(KC.MO(2)),KC.DOWN,  qdvsrs, qdwl,    KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
-                                      KC.UP,   escqd,    KC.TRNS, qdm1,           qdins,    qdvsr,  KC.TRNS, KC.TRNS, KC.TRNS, qdgit 
+        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS,                                     KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
+        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS,                                     KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
+        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS, KC.TRNS, KC.DOWN,  qdvsrs, qdwl,    KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
+                                      KC.UP,   escqd,    KC.TRNS, qdm1,    qdins,    qdvsr,  KC.TRNS, KC.TRNS, KC.TRNS, qdgit 
     ],
     # labview macros
     [
-        KC.TD(qdg,qdm,qde), KC.TD(qdq,qd1,qd1s), KC.TD(qdw,qdy,qd9),                   KC.OS(KC.LCTL(KC.LSHIFT)), KC.TD(qdp,qdps,qdu), KC.TD(qds,qdss,qdb),                                                                            KC.LCTL(KC.O), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F),   KC.LCTL(KC.L),  
-        KC.TD(qdv,qdk,qd0), KC.TD(qda,qdas,qdo), KC.TD(KC.LCTL(KC.U),  KC.LCTL(KC.B)), CTLOS,                     qdtxt,               KC.TD(qdr,qdrs,qdreq,qdreqs),                                                                   CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.TRNS,         KC.LCTL(KC.H),  
-        KC.TD(qd2,qdj,qdf), KC.TD(qdz,qdl,qdls), KC.TD(qdx,qd3,qd8),                   CLPSE,                     KC.TD(qdd,qdds,qdh), KC.TD(alignr,alignl,alignb),  KC.OS(KC.MO(2)), KC.LCTL(KC.E),     KC.LCTL(KC.ENT),    KC.TO(0), KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z),   KC.LCTL(KC.S),  
+        KC.TD(qdg,qdm,qde), KC.TD(qdq,qd1,qd1s), KC.TD(qdw,qdy,qd9),                   KC.OS(KC.LCTL(KC.LSHIFT)), KC.TD(qdp,qdps,qdu), KC.TD(qdr,qdrs,qdreq,qdreqs),                                                                   KC.LCTL(KC.W), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F),  KC.LCTL(KC.L),  
+        KC.TD(qdv,qdk,qd0), KC.TD(qda,qdas,qdo), KC.TD(KC.LCTL(KC.U),  KC.LCTL(KC.B)), EXPND,                     qdtxt,               KC.TD(qds,qdss,qdb),                                                                            CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.O),  KC.LCTL(KC.H),  
+        KC.TD(qd2,qdj,qdf), KC.TD(qdz,qdl,qdi),  KC.TD(qdx,qd3,qd8),                   CLPSE,                     KC.TD(qdd,qdds,qdh), KC.TD(alignr,alignl,alignb),  KC.OS(KC.MO(2)), KC.LCTL(KC.E),     KC.LCTL(KC.ENT),    KC.TO(0), KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z),  KC.LCTL(KC.S),  
                                                                                        KC.LCTL(KC.R),             KC.ESC,              KC.TD(KC.BSPC,delcln),        KC.TG(3),        KC.TG(1),          CTLSFT(KC.G),       KC.TRNS,  KC.LCTL(KC.G), KC.TRNS,        CTLSFT(KC.Z)   
     ],
 ]
