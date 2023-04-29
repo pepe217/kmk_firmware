@@ -47,7 +47,6 @@ else:
 		pass
 
 keyboard.extensions.append(rgb)
-
 combos = Combos()
 keyboard.modules.append(combos)
 tapdance = TapDance()
@@ -119,7 +118,7 @@ QD = KC.LCTL(KC.SPACE)
 qd_start_seq = simple_key_sequence(
 	    (
 	        QD,
-	        KC.MACRO_SLEEP_MS(100)
+	        KC.MACRO_SLEEP_MS(200)
         )
     )
 qdreq = simple_key_sequence(
@@ -152,10 +151,18 @@ qdrs = simple_key_sequence(
             CTLSFT(KC.R)
         )
     )
+# qdd = simple_key_sequence(
+#         (
+#             qd_start_seq,
+#             KC.LCTL(KC.D)
+#         )
+#     )
+# replace close qd with shortcut sequence, its faster
 qdd = simple_key_sequence(
         (
-            qd_start_seq,
-            KC.LCTL(KC.D)
+            KC.LCTL(KC.S),
+            KC.LCTL(KC.E),
+            KC.LCTL(KC.W),
         )
     )
 qdds = simple_key_sequence(
@@ -676,34 +683,30 @@ align = simple_key_sequence(
         (
             qd_start_seq,
             KC.LCTL(KC.C),
-            KC.TG(5)
         )
     )
 #QD alignment to left
 alignl = simple_key_sequence(
         (
             qd_start_seq,
-            KC.LCTL(KC.C),
             KC.A,
-            KC.ENT,
+            KC.LCTL(KC.C),
         )
     )
 #QD alignment to bottom
 alignb = simple_key_sequence(
         (
             qd_start_seq,
-            KC.LCTL(KC.C),
             KC.S,
-            KC.ENT,
+            KC.LCTL(KC.C),
         )
     )
 #QD alignment to right
 alignr = simple_key_sequence(
         (
             qd_start_seq,
-            KC.LCTL(KC.C),
             KC.D,
-            KC.ENT,
+            KC.LCTL(KC.C),
         )
     )
 
@@ -731,10 +734,10 @@ keyboard.keymap = [
     ],
     # navigation
     [
-        KC.LCTL(KC.L), MV10L,   MV10R,         MV10D,         MV10U,                undtab,                                         undtab,  MV10U,   MV10D,         MV10R,         MV10L,   KC.LCTL(KC.L),  
-        KC.LCTL(KC.Z), KC.LEFT, KC.RGHT,       KC.DOWN,       KC.UP,                rename,                                         rename,  KC.UP,   KC.DOWN,       KC.RGHT,       KC.LEFT, KC.LCTL(KC.Z),  
-        openf,         undo,    KC.LCTL(KC.X), KC.LCTL(KC.C), KC.TD(paste, pastee), savef,   KC.TRNS, KC.TG(3),   KC.TRNS, KC.TRNS, savef,   paste,   KC.LCTL(KC.C), KC.LCTL(KC.X), undo,    openf,  
-                                               KC.TRNS,       KC.LCTL(KC.V),        KC.TRNS, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.LCTL(KC.V)  
+        KC.LCTL(KC.L), MV10L,   MV10R,         MV10D,         MV10U,                undtab,                                         undtab,  KC.LSFT(KC.LGUI(KC.UP)), KC.LSFT(KC.LGUI(KC.DOWN)), KC.LSFT(KC.LGUI(KC.RGHT)), KC.LSFT(KC.LGUI(KC.LEFT)), KC.LCTL(KC.L),  
+        KC.LCTL(KC.Z), KC.LEFT, KC.RGHT,       KC.DOWN,       KC.UP,                rename,                                         rename,  KC.LGUI(KC.UP),          KC.LGUI(KC.DOWN),          KC.LGUI(KC.RGHT),          KC.LGUI(KC.LEFT),          KC.LCTL(KC.Z),  
+        openf,         undo,    KC.LCTL(KC.X), KC.LCTL(KC.C), KC.TD(paste, pastee), savef,   KC.TRNS, KC.TG(3),   KC.TRNS, KC.TRNS, savef,   paste,                   KC.LCTL(KC.C),             KC.LCTL(KC.X),             undo,                      KC.LALT(KC.TAB),  
+                                               KC.TRNS,       KC.LCTL(KC.V),        KC.TRNS, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,                 KC.LCTL(KC.V)  
     ],
     # labview text
     [
@@ -745,10 +748,10 @@ keyboard.keymap = [
     ],
     # labview macros
     [
-        KC.TD(qdg,qdm,qde), KC.TD(qdq,qd1,qd1s), KC.TD(qdw,qdy,qd9),                   KC.OS(KC.LCTL(KC.LSHIFT)), KC.TD(qdp,qdps,qdu), KC.TD(qdr,qdrs,qdreq,qdreqs),                                                                   KC.LCTL(KC.W), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F),  KC.LCTL(KC.L),  
-        KC.TD(qdv,qdk,qd0), KC.TD(qda,qdas,qdo), KC.TD(KC.LCTL(KC.U),  KC.LCTL(KC.B)), EXPND,                     qdtxt,               KC.TD(qds,qdss,qdb),                                                                            CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.O),  KC.LCTL(KC.H),  
-        KC.TD(qd2,qdj,qdf), KC.TD(qdz,qdl,qdi),  KC.TD(qdx,qd3,qd8),                   CLPSE,                     KC.TD(qdd,qdds,qdh), KC.TD(alignr,alignl,alignb),  KC.OS(KC.MO(2)), KC.LCTL(KC.E),     KC.LCTL(KC.ENT),    KC.TO(0), KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z),  KC.LCTL(KC.S),  
-                                                                                       KC.LCTL(KC.R),             KC.ESC,              KC.TD(KC.BSPC,delcln),        KC.TG(3),        KC.TG(1),          CTLSFT(KC.G),       KC.TRNS,  KC.LCTL(KC.G), KC.TRNS,        CTLSFT(KC.Z)   
+        KC.TD(qdg,qdm,qde), KC.TD(qdq,qd1,qd1s), KC.TD(qdw,qdy,qd9),                   KC.OS(KC.LCTL(KC.LSHIFT)), KC.TD(qdp,qdps,qdu), KC.TD(qdr,qdrs,qdreq,qdreqs),                                                                        KC.LCTL(KC.W), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F),  KC.LCTL(KC.L),  
+        KC.TD(qdv,qdk,qd0), KC.TD(qda,qdas,qdo), KC.TD(KC.LCTL(KC.U),  KC.LCTL(KC.B)), EXPND,                     qdtxt,               KC.TD(qds,qdss,qdb),                                                                                 CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.O),  KC.LCTL(KC.H),  
+        KC.TD(qd2,qdj,qdf), KC.TD(qdz,qdl,qdi),  KC.TD(qdx,qd3,qd8),                   CLPSE,                     KC.TD(qdd,qdds,qdh), KC.TD(alignr,alignl,alignb,align), KC.OS(KC.MO(2)), KC.LCTL(KC.E),     KC.LCTL(KC.ENT),    KC.TO(0), KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z),  KC.LCTL(KC.S),  
+                                                                                       KC.LCTL(KC.R),             KC.ESC,              KC.TD(KC.BSPC,delcln),             KC.TG(3),        KC.TG(1),          CTLSFT(KC.G),       KC.TRNS,  KC.LCTL(KC.G), KC.TRNS,        CTLSFT(KC.Z)   
     ],
 ]
 
