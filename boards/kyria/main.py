@@ -1,5 +1,4 @@
 from kyria_v3 import KMKKeyboard
-from kmk.extensions.media_keys import MediaKeys
 from kmk.extensions.rgb import RGB
 from kmk.keys import KC
 from kmk.modules.modtap import ModTap
@@ -16,6 +15,7 @@ from kmk.modules.labviewmacros import LabviewMacros
 
 keyboard = KMKKeyboard()
 keyboard.debug_enabled = False
+
 
 # rgb doesnt talk between sides, disable the right side LEDs to avoid confusion
 lside = str(getmount('/').label)[-1] == 'L'
@@ -55,23 +55,21 @@ tapdance.tap_time = 250
 keyboard.modules.append(tapdance)
 keyboard.modules.append(Layers())
 keyboard.modules.append(ModTap())
-keyboard.extensions.append(MediaKeys())
 keyboard.modules.append(OneShot())
 capsword = CapsWord()
 capsword.keys_ignored.append(KC.DOT)
+capsword.timeout = 2000
 keyboard.modules.append(capsword)
 keyboard.modules.append(MouseKeys())
- 
 split = Split(split_type=SplitType.UART, use_pio=True, split_flip=True, uart_flip=True)
 keyboard.modules.append(split)
 
 # General macros
-SFTOS = KC.OS(KC.LSHIFT, tap_time=None)
+SFTOS = KC.OS(KC.LSHIFT, tap_time=1500)
 GUIOS = KC.MT(KC.OS(KC.LM(2, KC.LGUI)), KC.LGUI)
 CTLSFT = KC.LSHIFT(KC.LCTL)
 CTLOS = KC.OS(KC.LCTL, tap_time=None)
 ALTOS = KC.OS(KC.LALT, tap_time=None)
-# CTLSFT = KC.LSHIFT(KC.LCTL)
 OS_LCTL_LSFT = KC.OS(KC.LCTL(SFTOS), tap_time=None)
 OS_LCTL_LALT = KC.OS(KC.LCTL(ALTOS), tap_time=None)
 OS_LSFT_LALT = KC.OS(KC.LSFT(ALTOS), tap_time=None)
@@ -149,7 +147,7 @@ lv = LabviewMacros(KC)
 keyboard.keymap = [
     # base
     [
-        ALTOS,  lv.test,  KC.W,    KC.F,  KC.P,    KC.B,                                                 KC.J,   KC.L,   KC.U,    KC.Y,   QUOTS,  MINSU,
+        ALTOS,  KC.Q,  KC.W,    KC.F,  KC.P,    KC.B,                                                 KC.J,   KC.L,   KC.U,    KC.Y,   QUOTS,  MINSU,
         CTLOS,  KC.A,  KC.R,    KC.S,  KC.T,    KC.G,                                                 KC.M,   KC.N,   KC.E,    KC.I,   KC.O,    EQLADD,
         PRN,    KC.Z,  KC.X,    KC.C,  KC.D,    KC.V,    KC.OS(KC.MO(2)), LVLYR,    COLON,   SFTOS,   KC.K,   KC.H,   COMMA,   PERD,   QUES,    BRACES,
                                 GUIOS, KC.ESC,  KC.BSPC, KC.TG(3),        KC.TG(1), KC.TAB,  KC.ENT,  KC.SPC, KC.DEL, CBRACES 

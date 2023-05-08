@@ -3,15 +3,14 @@ from kmk.handlers.sequences import simple_key_sequence
 # labview specific macros
 class LabviewMacros:
     def __init__(self, KC) -> None:
-        self.test = KC.TG(1)
         CTLSFT = KC.LSHIFT(KC.LCTL)
         self.MV10L = KC.LSHIFT(KC.LEFT)
         self.MV10U = KC.LSHIFT(KC.UP)
         self.MV10D = KC.LSHIFT(KC.DOWN)
         self.MV10R = KC.LSHIFT(KC.RIGHT)
-        self.EXPNDM = KC.OS(KC.LCTL(KC.MB_LMB))
-        self.CLPSEM = KC.OS(KC.LCTL(KC.LALT(KC.MB_LMB)))
-        self.panm = KC.OS(KC.LCTL(KC.LSFT(KC.B_LMB)))
+        self.EXPNDM = KC.OS(KC.LCTL(KC.MB_LMB), tap_time=10000)
+        self.CLPSEM = KC.OS(KC.LCTL(KC.LALT(KC.MB_LMB)), tap_time=10000)
+        self.panm = KC.OS(KC.LCTL(KC.LSFT(KC.B_LMB)), tap_time=10000)
         self.EXPND = KC.OS(KC.LCTL)
         self.CLPSE = KC.OS(KC.LCTL(KC.LALT))
         self.QD = KC.LCTL(KC.SPACE)
@@ -536,12 +535,12 @@ class LabviewMacros:
                 )
             )
         #delete object and remove broken wires
-        self.delcln = simple_key_sequence(
-            (
-                KC.BSPC,
-                KC.LCTL(KC.B)
-            )
-        ) 
+        # self.delcln = simple_key_sequence(
+        #     (
+        #         KC.BSPC,
+        #         KC.LCTL(KC.B)
+        #     )
+        # ) 
         #self.QD alignment and enter text entry 
         self.align = simple_key_sequence(
                 (
