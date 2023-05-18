@@ -80,8 +80,8 @@ keyboard.keymap = [
         KC.LSFT(KC.MW_UP), KC.LSFT(KC.MW_DN),
     ],
     [
-        KC.MB_LMB, KC.MB_RMB, dbclick, lv.EXPND,
-        lv.CLPSE, KC.TO(0), trclick, lv.panm,
+        KC.MB_LMB, KC.MB_RMB, dbclick, lv.EXPNDM,
+        lv.CLPSEM, KC.TO(0), trclick, lv.panm,
         lv.EXPND, KC.OS(KC.LSFT),
     ],
 ]
