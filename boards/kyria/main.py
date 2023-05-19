@@ -11,7 +11,7 @@ from kmk.modules.mouse_keys import MouseKeys
 from kmk.modules.combos import Chord, Combos
 from storage import getmount
 from kmk.handlers.sequences import simple_key_sequence
-from kmk.modules.labviewmacros import LabviewMacros
+from labviewmacros import LabviewMacros
 
 keyboard = KMKKeyboard()
 keyboard.debug_enabled = False
