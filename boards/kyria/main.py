@@ -16,7 +16,6 @@ from labviewmacros import LabviewMacros
 keyboard = KMKKeyboard()
 keyboard.debug_enabled = False
 
-
 # rgb doesnt talk between sides, disable the right side LEDs to avoid confusion
 lside = str(getmount('/').label)[-1] == 'L'
 if lside:
@@ -30,7 +29,7 @@ if lside:
 
     class Layers(_Layers):
         last_top_layer = 0
-        hues = (120, 60, 100, 160, 240, 0)
+        hues = (120, 60, 100, 160, 240, 0, 280, 320)
 	    
         def after_hid_send(self, keyboard):
             if keyboard.active_layers[0] != self.last_top_layer:
@@ -87,7 +86,6 @@ PRN = KC.TD(KC.LPRN, KC.RPRN)
 EQLADD = KC.TD(KC.EQL, KC.PLUS)
 MINSU = KC.TD(KC.MINS, KC.UNDS)
 QUES = KC.TD(KC.SLSH, KC.QUES)
-PERD = KC.TD(KC.DOT, KC.RABK)
 COMMA = KC.TD(KC.COMM, KC.LABK)
 rename = simple_key_sequence(
 	    (
@@ -142,14 +140,20 @@ newtab = simple_key_sequence(
         KC.TG(3)
     )
 )
+maximize = simple_key_sequence(
+     (
+        KC.LGUI(KC.UP),
+        KC.TG(3)
+     )
+)
 lv = LabviewMacros(KC)
 
 keyboard.keymap = [
     # base
     [
         ALTOS,  KC.Q,  KC.W,    KC.F,  KC.P,    KC.B,                                                 KC.J,   KC.L,   KC.U,    KC.Y,   QUOTS,  MINSU,
-        CTLOS,  KC.A,  KC.R,    KC.S,  KC.T,    KC.G,                                                 KC.M,   KC.N,   KC.E,    KC.I,   KC.O,    EQLADD,
-        PRN,    KC.Z,  KC.X,    KC.C,  KC.D,    KC.V,    KC.OS(KC.MO(2)), LVLYR,    COLON,   SFTOS,   KC.K,   KC.H,   COMMA,   PERD,   QUES,    BRACES,
+        CTLOS,  KC.A,  KC.R,    KC.S,  KC.T,    KC.G,                                                 KC.M,   KC.N,   KC.E,    KC.I,   KC.O,   EQLADD,
+        PRN,    KC.Z,  KC.X,    KC.C,  KC.D,    KC.V,    KC.OS(KC.MO(2)), LVLYR,    COLON,   SFTOS,   KC.K,   KC.H,   COMMA,   KC.DOT, QUES,   BRACES,
                                 GUIOS, KC.ESC,  KC.BSPC, KC.TG(3),        KC.TG(1), KC.TAB,  KC.ENT,  KC.SPC, KC.DEL, CBRACES 
     ],
     # keypad/function
@@ -161,15 +165,15 @@ keyboard.keymap = [
     ],
     # symbols
     [
-        KC.GRV,  KC.N1,   KC.N2,   KC.N3,   KC.N4,    KC.N5,                                          KC.N6,   KC.N7,    KC.N8,    KC.N9,   KC.N0,    KC.PLUS,  
         KC.TILD, KC.EXLM, KC.AT,   KC.HASH, KC.DLR,   KC.PERC,                                        KC.CIRC, KC.AMPR,  KC.ASTR,  KC.LPRN, KC.RPRN,  KC.EQL,  
+        KC.GRV,  KC.N1,   KC.N2,   KC.N3,   KC.N4,    KC.N5,                                          KC.N6,   KC.N7,    KC.N8,    KC.N9,   KC.N0,    KC.PLUS,  
         KC.PIPE, KC.BSLS, KC.COLN, KC.SCLN, KC.MINUS, KC.LBRC,  KC.TRNS, KC.TG(2),  KC.TRNS, KC.CW,   KC.RBRC, KC.UNDS,  KC.COMMA, KC.DOT,  KC.SLASH, KC.QUES,  
                                    KC.TRNS, KC.TRNS,  KC.TRNS,  KC.DOWN, KC.UP,     KC.LCBR, KC.RCRB, KC.LEFT, KC.RIGHT, KC.PSCR  
     ],
     # navigation
     [
         KC.LCTL(KC.L), lv.MV10L,lv.MV10R,      lv.MV10D,      lv.MV10U,      newtab,                                         KC.TRNS, KC.LSFT(KC.LGUI(KC.UP)), KC.LSFT(KC.LGUI(KC.DOWN)), KC.LSFT(KC.LGUI(KC.RGHT)), KC.LSFT(KC.LGUI(KC.LEFT)), KC.LCTL(KC.L),  
-        KC.LCTL(KC.Z), KC.LEFT, KC.RGHT,       KC.DOWN,       KC.UP,         rename,                                         KC.TRNS, KC.LGUI(KC.UP),          KC.LGUI(KC.DOWN),          KC.LGUI(KC.RGHT),          KC.LGUI(KC.LEFT),          KC.LCTL(KC.Z),  
+        KC.LCTL(KC.Z), KC.LEFT, KC.RGHT,       KC.DOWN,       KC.UP,         rename,                                         KC.TRNS, maximize,                KC.LGUI(KC.DOWN),          KC.LGUI(KC.RGHT),          KC.LGUI(KC.LEFT),          KC.LCTL(KC.Z),  
         KC.TRNS,       undo,    KC.LCTL(KC.X), KC.LCTL(KC.C), paste,         pastee,  KC.TRNS, KC.TG(3),   KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,                 KC.TRNS,                   KC.TRNS,                   KC.TRNS,                   KC.LALT(KC.TAB),  
                                                undtab,        KC.LCTL(KC.V), KC.TRNS, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,                 KC.TRNS  
     ],
@@ -180,12 +184,26 @@ keyboard.keymap = [
         KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS, KC.TRNS, KC.DOWN,  lv.qdvsrs, lv.qdwl, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
                                       KC.UP,   lv.escqd, KC.TRNS, lv.qdm1, lv.qdins, lv.qdvsr,  KC.TRNS, KC.TRNS, KC.TRNS, lv.qdgit 
     ],
-    # labview macros
+    # labview macro layer 1
     [
-        KC.TD(lv.qdg,lv.qdm),        KC.TD(lv.qdq,lv.qd1,lv.qd1s), KC.TD(lv.qdw,lv.qdy,lv.qd9),             KC.TD(lv.cprop, lv.cref, lv.cinv),  KC.TD(lv.qdp,lv.qdps,lv.qdu), KC.TD(lv.qdr,lv.qdrs,lv.qdreq,lv.qdreqs),                                                                        KC.LCTL(KC.W), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F),  KC.LCTL(KC.L),  
-        KC.TD(lv.qdv,lv.qdk,lv.qd0), KC.TD(lv.qda,lv.qdas,lv.qdo), KC.TD(KC.LCTL(KC.U), KC.LCTL(KC.B)),     lv.EXPND,                           lv.qdtxt,                     KC.TD(lv.qds,lv.qdss,lv.qdb),                                                                                    CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.O),  KC.LCTL(KC.H),  
-        KC.TD(lv.qd2,lv.qdj,lv.qde), KC.TD(lv.qdz,lv.qdl,lv.qdi),  KC.TD(lv.qdx,lv.qd3,lv.qd8),             lv.CLPSE,                           KC.TD(lv.qdd,lv.qdds,lv.qdh), KC.TD(lv.alignr,lv.alignl,lv.alignb,lv.align), KC.OS(KC.MO(2)), KC.LCTL(KC.E),     KC.LCTL(KC.ENT),    KC.TO(0), KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z),  KC.LCTL(KC.S),  
-                                                                                                            KC.LCTL(KC.R),                      KC.ESC,                       KC.BSPC,                                       KC.TG(3),        KC.TG(1),          CTLSFT(KC.G),       KC.TRNS,  KC.LCTL(KC.G), KC.TRNS,        CTLSFT(KC.Z)   
+        lv.qdrs,   lv.qdr,    lv.qda,        lv.qdas,       lv.qds,   lv.qdss,                                                                                          KC.LCTL(KC.W), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F),  KC.LCTL(KC.L),  
+        lv.alignr, lv.delcln, KC.LCTL(KC.U), lv.EXPND,      lv.qdtxt, KC.OS(KC.MO(6), tap_time=3000),                                                                   CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.O),  KC.LCTL(KC.H),  
+        lv.alignl, lv.qdx,    KC.LCTL(KC.B), lv.CLPSE,      lv.qdd,   KC.OS(KC.MO(7), tap_time=3000), KC.OS(KC.MO(2)), KC.LCTL(KC.E),     KC.LCTL(KC.ENT),    KC.TO(0), KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z),  KC.LCTL(KC.S),  
+                                             KC.LCTL(KC.R), KC.ESC,   KC.BSPC,                        KC.TG(3),        KC.TG(1),          CTLSFT(KC.G),       KC.TRNS,  KC.LCTL(KC.G), KC.TRNS,        CTLSFT(KC.Z)   
+    ],
+    # labview macro layer 2
+    [
+        lv.qdreqs, lv.qdreq, lv.cref, lv.cprop, lv.cinv, lv.clcl,                                     KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+        lv.alignb, lv.qdi,   lv.qd2,  lv.qdn,   lv.qdns, lv.qd9,                                      KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+        lv.alignt, lv.align, lv.qdq,  lv.qdz,   lv.qdds, lv.qdg,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
+                                      KC.TRNS,  KC.TRNS, KC.TRNS, lv.qdy,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS   
+    ],
+    # labview macro layer 3
+    [
+        lv.qdu, lv.qdo, lv.qdm, lv.qd0,  lv.qdk,  lv.qde,                                      KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+        lv.qdv, lv.qdi, lv.qd3, lv.qd1,  lv.qdps, lv.qdp,                                      KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+        lv.qd8, lv.qdh, lv.qdj, lv.qd1s, lv.qdb,  lv.qdt,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
+                                KC.TRNS, KC.TRNS, KC.TRNS, lv.qdw,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS   
     ],
 ]
 

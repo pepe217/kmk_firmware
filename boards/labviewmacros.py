@@ -385,12 +385,12 @@ class LabviewMacros:
                     KC.LCTL(KC.N)
                 )
             )
-        # self.qdns = simple_key_sequence(
-        #         (
-        #             start_seq,
-        #             CTLSFT(KC.N)
-        #         )
-        #     )
+        self.qdns = simple_key_sequence(
+                (
+                    start_seq,
+                    CTLSFT(KC.N)
+                )
+            )
         self.qdh = simple_key_sequence(
                 (
                     start_seq,
@@ -532,20 +532,28 @@ class LabviewMacros:
                 )
             )
         #delete object and remove broken wires
-        # self.delcln = simple_key_sequence(
-        #     (
-        #         KC.BSPC,
-        #         KC.LCTL(KC.B)
-        #     )
-        # ) 
-        #self.QD alignment and enter text entry 
+        self.delcln = simple_key_sequence(
+            (
+                KC.BSPC,
+                KC.LCTL(KC.B)
+            )
+        ) 
+        #QD alignment and enter text entry 
         self.align = simple_key_sequence(
                 (
                     start_seq,
                     KC.LCTL(KC.C),
                 )
             )
-        #self.QD alignment to left
+        #QD alignment to top 
+        self.alignt = simple_key_sequence(
+                (
+                    start_seq,
+                    KC.W,
+                    KC.LCTL(KC.C),
+                )
+            )
+        #QD alignment to left
         self.alignl = simple_key_sequence(
                 (
                     start_seq,
@@ -553,7 +561,7 @@ class LabviewMacros:
                     KC.LCTL(KC.C),
                 )
             )
-        #self.QD alignment to bottom
+        #QD alignment to bottom
         self.alignb = simple_key_sequence(
                 (
                     start_seq,
@@ -561,7 +569,7 @@ class LabviewMacros:
                     KC.LCTL(KC.C),
                 )
             )
-        #self.QD alignment to right
+        #QD alignment to right
         self.alignr = simple_key_sequence(
                 (
                     start_seq,
@@ -582,6 +590,14 @@ class LabviewMacros:
                 (
                     start_seq,
                     KC.P,
+                    KC.LCTL(KC.F),
+                )
+            )
+        # create local var from selection
+        self.clcl = simple_key_sequence(
+                (
+                    start_seq,
+                    KC.L,
                     KC.LCTL(KC.F),
                 )
             )
