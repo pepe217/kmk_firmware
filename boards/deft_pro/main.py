@@ -5,28 +5,35 @@ from kmk.modules.layers import Layers as _Layers
 from kmk.keys import KC
 from kmk.modules.oneshot import OneShot
 from kmk.modules.mouse_keys import MouseKeys
-from kmk.extensions.rgb import RGB
 from kmk.modules.sticky_mod import StickyMod
 from kmk.handlers.sequences import simple_key_sequence
+import digitalio
 from kmk.hid import HIDModes
-
-rgb = RGB(
-        pixel_pin=board.D4,
-        num_pixels=1,
-        hue_default=60,
-        sat_default=255,
-        val_default=255
-    )
 
 class Layers(_Layers):
     last_top_layer = 0
-    hues = (60, 0)
-    
+    led_states = [
+        [True, True, False],
+        [True, False, True],
+        [False, True, True]
+    ] 
+    red = digitalio.DigitalInOut(board.LED_RED)
+    red.direction = digitalio.Direction.OUTPUT
+    red.value = led_states[0][0]
+    blue = digitalio.DigitalInOut(board.LED_BLUE)
+    blue.direction = digitalio.Direction.OUTPUT
+    blue.value = led_states[0][1]
+    green = digitalio.DigitalInOut(board.LED_GREEN)
+    green.direction = digitalio.Direction.OUTPUT
+    green.value = led_states[0][2]
+    led_pins = [red, blue, green]
+
     def after_hid_send(self, keyboard):
         if keyboard.active_layers[0] != self.last_top_layer:
             self.last_top_layer = keyboard.active_layers[0]
             # change led when layer change
-            rgb.set_hsv_fill(self.hues[self.last_top_layer], 255, 255)
+            for i in range(len(self.led_pins)):
+                self.led_pins[i].value = self.led_states[self.last_top_layer][i]
 
 # mapping is buttons straight to pins, no matrix
 # below matches the silkscreen on the case, not the PCB
@@ -54,7 +61,7 @@ class MyKeyboard(KMKKeyboard):
     coord_mapping = [9, 8, 7, 6, 4, 5, 2, 3, 0, 1]
 
 keyboard = MyKeyboard()
-keyboard.extensions.append(rgb)
+keyboard.debug_enabled = True
 keyboard.modules.append(Layers())
 keyboard.modules.append(OneShot())
 keyboard.modules.append(StickyMod())
@@ -72,39 +79,63 @@ dbclick = simple_key_sequence(
         KC.MB_LMB
     )
 )
-start_altctl_click = simple_key_sequence(
+start_pan = simple_key_sequence(
+    (
+        KC.LCTL(no_release=True),
+        KC.LSFT(no_release=True),
+        KC.MB_LMB(no_release=True),
+        KC.LSFT(no_press=True),
+        KC.LCTL(no_press=True),
+        KC.TG(2)
+    )
+)
+start_collapse = simple_key_sequence(
     (
         KC.LCTL(no_release=True),
         KC.LALT(no_release=True),
         KC.MB_LMB(no_release=True),
         KC.LALT(no_press=True),
         KC.LCTL(no_press=True),
+        KC.TG(2)
     )
 )
-start_ctl_click = simple_key_sequence(
+start_expand = simple_key_sequence(
     (
         KC.LCTL(no_release=True),
         KC.MB_LMB(no_release=True),
         KC.LCTL(no_press=True),
+        KC.TG(2)
+    )
+)
+end_click = simple_key_sequence(
+    (
+        KC.MB_LMB(no_press=True),
+        KC.TG(2)
     )
 )
 CTLALT = KC.LCTL(KC.LALT)
 CTLSFT = KC.LSHIFT(KC.LCTL)
 keyboard.keymap = [
     [
-        KC.MB_LMB, KC.MB_RMB, KC.MB_MMB,
-        KC.SM(KC.TAB, KC.LALT), KC.MB_BTN4,
+        KC.SM(KC.TAB, KC.LALT), KC.MB_RMB, KC.MB_MMB,
+        KC.MB_LMB, KC.MB_BTN4,
         KC.TG(1), KC.LCTL(KC.Z), CTLSFT(KC.Z),
         KC.OS(KC.MB_LMB, tap_time=10000), dbclick,
     ],
     [
-        KC.TRNS, KC.TRNS, trclick,
-        start_ctl_click, start_altctl_click, 
-        KC.TRNS, KC.TRNS, KC.TRNS,
-        KC.MB_LMB(no_press=True), KC.TRNS,
+        start_expand, KC.TRNS, start_pan,
+        KC.TRNS, start_collapse, 
+        KC.TRNS, KC.OS(KC.LCTL), trclick,
+        KC.TRNS, KC.TRNS,
+    ],
+    [
+        end_click, end_click, end_click, 
+        end_click, end_click,
+        end_click, end_click, end_click, 
+        end_click, end_click, 
     ],
 ]
 
 if __name__ == '__main__':
     # keyboard.go()
-    keyboard.go(hid_type=HIDModes.BLE, ble_name='KMKeyboard')
+    keyboard.go(hid_type=HIDModes.BLE)
