@@ -192,24 +192,24 @@ keyboard.keymap = [
     ],
     # 6 - labview macro layer 
     [
-        lv.qdreqs, lv.qdreq,      lv.cref, lv.cprop, lv.cinv, lv.clcl,                                       KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
-        lv.qdi,    lv.qdw,        lv.qd2,  lv.qdn,   lv.qdns, lv.qd9,                                        KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
-        lv.align,  KC.LCTL(KC.B), lv.qdq,  lv.qdos,  lv.qdds, lv.qdo,   lv.EXPND, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
-                                           KC.TRNS,  KC.TRNS, lv.CLPSE, lv.qdy,   KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS   
+        lv.qdreqs, lv.qdreq, lv.cref,  lv.cprop, lv.cinv, lv.clcl,                                      KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+        lv.qdi,    lv.qdw,   lv.qdg,   lv.qd2,   lv.qdn,  lv.qdns,                                      KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+        lv.align,  lv.qd9,   lv.qdq,   lv.qdos,  lv.qdds, lv.qdo,   KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
+                                       KC.TRNS,  KC.TRNS, lv.CLPSE, lv.qdy,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS   
     ],
     # 7 - labview macro layer
     [
         lv.qdu, lv.qdz, lv.qdm, lv.qd0,  lv.qdk,  lv.qde,                                      KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
         lv.qdv, lv.qdi, lv.qd3, lv.qd1,  lv.qdps, lv.qdp,                                      KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
-        lv.qd8, lv.qdh, lv.qdj, lv.qd1s, lv.qdb,  lv.qdt,  lv.qdg,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
+        lv.qd8, lv.qdh, lv.qdj, lv.qd1s, lv.qdb,  lv.qdt,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
                                 KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS   
     ],
     # 8 - labview macro layer
     [
         KC.LCTL(KC.W), CTLSFT(KC.DOT), CTLSFT(KC.DOWN),  CTLSFT(KC.F),  KC.LCTL(KC.F),   KC.LCTL(KC.L),                                                KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
-        CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.O),   KC.LCTL(KC.H),                                                KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
-        KC.LCTL(KC.M), CTLSFT(KC.S),   CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.Z),   KC.LCTL(KC.S), lv.tools,     KC.TRNS,       KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
-                                                         CTLSFT(KC.G),  KC.LCTL(KC.ENT), KC.LCTL(KC.G), CTLSFT(KC.Z), KC.LCTL(KC.R), KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS
+        CTLSFT(KC.E),  KC.LCTL(KC.N),  CTLSFT(KC.RIGHT), KC.LCTL(KC.I), KC.LCTL(KC.R),   KC.LCTL(KC.H),                                                KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+        KC.LCTL(KC.M), KC.LCTL(KC.Z),  CTLSFT(KC.UP),    CTLSFT(KC.W),  KC.LCTL(KC.S),   lv.EXPND,      lv.tools,      KC.TRNS,      KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
+                                                         CTLSFT(KC.G),  KC.LCTL(KC.ENT), KC.LCTL(KC.G), KC.LCTL(KC.O), CTLSFT(KC.Z), KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS
     ],
 ]
 

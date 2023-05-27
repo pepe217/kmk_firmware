@@ -11,6 +11,13 @@ class LabviewMacros:
         self.EXPND = KC.OS(KC.LCTL)
         self.CLPSE = KC.OS(KC.LCTL(KC.LALT))
         self.QD = KC.LCTL(KC.SPACE)
+        self.tools = simple_key_sequence(
+            (
+                KC.LCTL,
+                KC.LSFT,
+                KC.MB_LMB
+            )
+        )
         start_seq = simple_key_sequence(
                 (
                     self.QD,
@@ -457,12 +464,12 @@ class LabviewMacros:
                     KC.LCTL(KC.O)
                 )
             )
-        # self.qdos = simple_key_sequence(
-        #         (
-        #             start_seq,
-        #             CTLSFT(KC.O)
-        #         )
-        #     )
+        self.qdos = simple_key_sequence(
+                (
+                    start_seq,
+                    CTLSFT(KC.O)
+                )
+            )
         self.qds = simple_key_sequence(
                 (
                     start_seq,
