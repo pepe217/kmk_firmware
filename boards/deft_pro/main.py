@@ -6,6 +6,7 @@ from kmk.keys import KC
 from kmk.modules.oneshot import OneShot
 from kmk.modules.mouse_keys import MouseKeys
 from kmk.modules.sticky_mod import StickyMod
+from kmk.modules.modtap import ModTap
 from kmk.handlers.sequences import simple_key_sequence
 import digitalio
 from kmk.hid import HIDModes
@@ -15,7 +16,8 @@ class Layers(_Layers):
     led_states = [
         [True, True, False],
         [True, False, True],
-        [False, True, True]
+        [False, True, True],
+        [False, True, True],
     ] 
     red = digitalio.DigitalInOut(board.LED_RED)
     red.direction = digitalio.Direction.OUTPUT
@@ -61,11 +63,12 @@ class MyKeyboard(KMKKeyboard):
     coord_mapping = [9, 8, 7, 6, 4, 5, 2, 3, 0, 1]
 
 keyboard = MyKeyboard()
-keyboard.debug_enabled = True
+keyboard.debug_enabled = False
 keyboard.modules.append(Layers())
 keyboard.modules.append(OneShot())
 keyboard.modules.append(StickyMod())
 keyboard.modules.append(MouseKeys())
+keyboard.modules.append(ModTap())
 trclick = simple_key_sequence(
     (
         KC.MB_LMB,
@@ -114,18 +117,18 @@ end_click = simple_key_sequence(
     )
 )
 CTLALT = KC.LCTL(KC.LALT)
-CTLSFT = KC.LSHIFT(KC.LCTL)
+CTLSFT = KC.LSHIFT(KC.LCTL) 
 keyboard.keymap = [
     [
-        KC.SM(KC.TAB, KC.LALT), KC.MB_RMB, KC.MB_MMB,
+        KC.MT(KC.SM(KC.TAB, KC.LALT), KC.ENT), KC.MB_RMB, KC.MB_MMB,
         KC.MB_LMB, KC.MB_BTN4,
         KC.TG(1), KC.LCTL(KC.Z), CTLSFT(KC.Z),
-        KC.OS(KC.MB_LMB, tap_time=10000), dbclick,
+        KC.OS(KC.MB_LMB, tap_time=10000), KC.MT(dbclick, trclick),
     ],
     [
-        start_expand, KC.TRNS, start_pan,
-        KC.TRNS, start_collapse, 
-        KC.TRNS, KC.OS(KC.LCTL), trclick,
+        KC.TRNS, KC.TRNS, start_pan,
+        KC.TRNS, start_expand,
+        KC.TRNS, KC.TRNS, start_collapse,
         KC.TRNS, KC.TRNS,
     ],
     [
@@ -137,5 +140,4 @@ keyboard.keymap = [
 ]
 
 if __name__ == '__main__':
-    # keyboard.go()
     keyboard.go(hid_type=HIDModes.BLE)
