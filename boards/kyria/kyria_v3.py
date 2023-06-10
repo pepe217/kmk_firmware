@@ -32,7 +32,6 @@ class KMKKeyboard(_KMKKeyboard):
         row_pins = (pins[17], pins[16], pins[15], pins[14])
     diode_orientation = DiodeOrientation.COL2ROW
     data_pin = pins[1]
-    data_pin2 = pins[25]
     rgb_pixel_pin = pins[0]
     encoder_pin_0 = pins[19]
     encoder_pin_1 = pins[18]
