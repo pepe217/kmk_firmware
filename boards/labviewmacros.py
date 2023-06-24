@@ -234,7 +234,7 @@ class LabviewMacros:
         self.qdls = simple_key_sequence((start_seq, CTLSFT(KC.L)))
         self.qdn = simple_key_sequence((start_seq, KC.LCTL(KC.N)))
         self.qdns = simple_key_sequence((start_seq, CTLSFT(KC.N)))
-        self.qdnc = simple_key_sequence((start_seq, KC.C, CTLSFT(KC.N)))
+        self.qdnc = simple_key_sequence((start_seq, KC.C, KC.LCTL(KC.N)))
         self.qdh = simple_key_sequence((start_seq, KC.LCTL(KC.H)))
         # self.qdhs = simple_key_sequence(
         #         (
@@ -249,9 +249,11 @@ class LabviewMacros:
         #             CTLSFT(KC.U)
         #         )
         #     )
-        # e is label or caption rename, exit text layer
+        # e is label or caption rename, exit lv text input layer
         self.rnmlbl = simple_key_sequence((KC.LCTL(KC.E), KC.TG(5)))
         self.rnmcpt = simple_key_sequence((CTLSFT(KC.E), KC.TG(5)))
+        # multiple rename, exit back to base text layer
+        self.rnmult = simple_key_sequence((start_seq, KC.LCTL(KC.E), KC.TO(0)))
         self.qdy = simple_key_sequence((start_seq, KC.LCTL(KC.Y)))
         # self.qdys = simple_key_sequence(
         #         (
@@ -269,6 +271,10 @@ class LabviewMacros:
         self.qdo = simple_key_sequence((start_seq, KC.LCTL(KC.O)))
         self.qdos = simple_key_sequence((start_seq, CTLSFT(KC.O)))
         self.qdods = simple_key_sequence((start_seq, KC.D, KC.LCTL(KC.O)))
+        # leave the labview macro layer to allow case name input
+        self.qdodps = simple_key_sequence(
+            (start_seq, KC.D, KC.P, KC.LCTL(KC.O), KC.TG(5))
+        )
         self.qdodfs = simple_key_sequence((start_seq, KC.D, KC.F, KC.LCTL(KC.O)))
         self.qds = simple_key_sequence((start_seq, KC.LCTL(KC.S)))
         self.qdss = simple_key_sequence((start_seq, CTLSFT(KC.S)))
@@ -286,8 +292,8 @@ class LabviewMacros:
         self.qdvsrs = simple_key_sequence((CTLSFT(KC.N5), KC.TG(5)))
         # vi server rename
         self.qdvsr = simple_key_sequence((KC.LCTL(KC.N5), KC.TG(5)))
-        # mouse 1 to insert object at cursor and goto macro layer
-        self.qdm1 = simple_key_sequence((KC.ENT, KC.MB_LMB, KC.TG(5)))
+        # insert object and go back to macro layer
+        self.qdm1 = simple_key_sequence((KC.ENT, KC.TG(5)))
         # delete object and remove broken wires
         self.delcln = simple_key_sequence((KC.BSPC, KC.LCTL(KC.B)))
         # QD alignment and enter text entry
