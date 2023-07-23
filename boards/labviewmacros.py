@@ -55,12 +55,12 @@ class LabviewMacros:
         #         )
         #     )
         self.qdg = simple_key_sequence((start_seq, KC.LCTL(KC.G)))
-        # self.qdgs = simple_key_sequence(
-        #         (
-        #             start_seq,
-        #             CTLSFT(KC.G)
-        #         )
-        #     )
+        self.qdgs = simple_key_sequence(
+                (
+                    start_seq,
+                    CTLSFT(KC.G)
+                )
+            )
         self.qdb = simple_key_sequence((start_seq, KC.LCTL(KC.B)))
         # self.qdbs = simple_key_sequence(
         #         (
