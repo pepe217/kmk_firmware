@@ -20,7 +20,7 @@ class LabviewMacros:
             )
         )
         self.QD = KC.LCTL(KC.SPACE)
-        start_seq = simple_key_sequence((self.QD, KC.MACRO_SLEEP_MS(200)))
+        start_seq = simple_key_sequence((self.QD, KC.MACRO_SLEEP_MS(100)))
         self.qdreq = simple_key_sequence((start_seq, KC.R, KC.E, KC.Q, KC.LCTL(KC.R)))
         self.qdreqs = simple_key_sequence((start_seq, KC.R, KC.E, KC.Q, CTLSFT(KC.R)))
         self.qdr = simple_key_sequence((start_seq, KC.LCTL(KC.R)))
@@ -286,6 +286,8 @@ class LabviewMacros:
         self.qdwl = simple_key_sequence((KC.LCTL(KC.N6), KC.TG(5)))
         # insert/replace object and goto macro layer
         self.qdins = simple_key_sequence((KC.LCTL(KC.N4), KC.TG(5)))
+        # enter and back to lv macros
+        self.entqd = simple_key_sequence((KC.ENT, KC.TG(5)))  
         # escape self.qd and back to macro
         self.escqd = simple_key_sequence((KC.ESC, KC.TG(5)))
         # shifted vi server rename
@@ -366,5 +368,12 @@ class LabviewMacros:
                 KC.N,
                 KC.V,
                 KC.LCTL(KC.F),
+            )
+        )
+        # set vi icon to the selected text and go back to macro layer
+        self.iconTxt = simple_key_sequence(
+            (
+            KC.LCTL(KC.Q),
+            KC.TG(5),
             )
         )
