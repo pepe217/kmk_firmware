@@ -121,13 +121,6 @@ undo = simple_key_sequence(
         KC.TG(3)
     )
 )
-# save and leave layer
-savef = simple_key_sequence(
-    (
-        KC.LCTL(KC.S),
-        KC.TG(3)
-    )
-) 
 # open new tab, paste and enter
 newtab = simple_key_sequence(
     (
@@ -192,7 +185,7 @@ keyboard.keymap = [
     ],
     # 4 - labview  quickdrop text input
     [
-        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS,                                                           KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS,  
+        KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS,                                                           KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  lv.qdkleave,  
         KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS,                                                           KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  lv.iconTxt,  
         KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS,  KC.TRNS, KC.TRNS, KC.DOWN,  KC.HT(lv.qdvsr, lv.qdvsrs),  KC.TRNS,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  lv.qdwl,  
                                       KC.UP,   lv.escqd, KC.TRNS, lv.qdm1, lv.qdins, KC.HT(lv.rnmlbl, lv.rnmcpt), lv.entqd, KC.TRNS, KC.TRNS, lv.qdgit 
@@ -216,7 +209,7 @@ keyboard.keymap = [
         lv.qdreqs, lv.qdreq, lv.qdm,    lv.qdods, lv.qdp,  lv.qdps,                                        KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
         lv.qdw,    lv.qdg,   lv.qdodps, lv.qdnc,  lv.qdns, lv.qdn,                                         KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
         lv.qd2,    lv.qd9,   lv.qdodfs, lv.qdd,   lv.qdos, lv.qdo,   lv.qd0,  lv.rnmult, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, 
-                                        KC.TRNS,  lv.qdds, lv.CLPSE, lv.pan,  lv.qdq,    KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS   
+                                        lv.qdks,  lv.qdds, lv.CLPSE, lv.pan,  lv.qdq,    KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS   
     ],
     # 8 - labview macro layer
     [
