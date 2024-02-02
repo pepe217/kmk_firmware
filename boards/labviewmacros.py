@@ -230,7 +230,7 @@ class LabviewMacros:
                     CTLSFT(KC.K)
                 )
             )
-        self.qdkleave = simple_key_sequence((start_seq, KC.LCTL(KC.K), KC.TG(5)))
+        self.qdkleave = simple_key_sequence((KC.LCTL(KC.K), KC.TG(5)))
         self.qdl = simple_key_sequence((start_seq, KC.LCTL(KC.L)))
         self.qdls = simple_key_sequence((start_seq, CTLSFT(KC.L)))
         self.qdn = simple_key_sequence((start_seq, KC.LCTL(KC.N)))
