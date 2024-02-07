@@ -1,7 +1,5 @@
-import busio
 from supervisor import ticks_ms
 
-import adafruit_displayio_ssd1306
 import displayio
 import terminalio
 from adafruit_display_text import label
@@ -12,8 +10,6 @@ from kmk.keys import make_key
 from kmk.kmktime import PeriodicTimer, ticks_diff
 from kmk.modules.split import Split, SplitSide
 from kmk.utils import clamp
-
-displayio.release_displays()
 
 
 class TextEntry:
@@ -77,13 +73,44 @@ class ImageEntry:
             self.side = SplitSide.RIGHT
 
 
-class Oled(Extension):
+class DisplayBase:
+    def __init__(self):
+        raise NotImplementedError
+
+    def during_bootup(self, width, height, rotation):
+        raise NotImplementedError
+
+    def deinit(self):
+        raise NotImplementedError
+
+    def sleep(self):
+        self.display.sleep()
+
+    def wake(self):
+        self.display.wake()
+
+    @property
+    def brightness(self):
+        return self.display.brightness
+
+    @brightness.setter
+    def brightness(self, new_brightness):
+        self.display.brightness = new_brightness
+
+    # display.show() is deprecated, so use root_group instead
+    @property
+    def root_group(self):
+        return self.display.root_group
+
+    @root_group.setter
+    def root_group(self, group):
+        self.display.root_group = group
+
+
+class Display(Extension):
     def __init__(
         self,
-        i2c=None,
-        sda=None,
-        scl=None,
-        device_address=0x3C,
+        display=None,
         entries=[],
         width=128,
         height=32,
@@ -99,7 +126,7 @@ class Oled(Extension):
         powersave_dim_target=0.1,
         powersave_off_time=30,
     ):
-        self.device_address = device_address
+        self.display = display
         self.flip = flip
         self.flip_left = flip_left
         self.flip_right = flip_right
@@ -119,19 +146,15 @@ class Oled(Extension):
         self.powersave_off_time_ms = powersave_off_time * 1000
         self.dim_period = PeriodicTimer(50)
         self.split_side = None
-        # i2c initialization
-        self.i2c = i2c
-        if self.i2c is None:
-            self.i2c = busio.I2C(scl, sda)
 
         make_key(
-            names=('OLED_BRI',),
-            on_press=self.oled_brightness_increase,
+            names=('DIS_BRI',),
+            on_press=self.display_brightness_increase,
             on_release=handler_passthrough,
         )
         make_key(
-            names=('OLED_BRD',),
-            on_press=self.oled_brightness_decrease,
+            names=('DIS_BRD',),
+            on_press=self.display_brightness_decrease,
             on_release=handler_passthrough,
         )
 
@@ -164,7 +187,7 @@ class Oled(Extension):
                         y=entry.y,
                     )
                 )
-        self.display.show(splash)
+        self.display.root_group = splash
 
     def on_runtime_enable(self, sandbox):
         return
@@ -173,7 +196,6 @@ class Oled(Extension):
         return
 
     def during_bootup(self, keyboard):
-
         for module in keyboard.modules:
             if isinstance(module, Split):
                 self.split_side = module.split_side
@@ -187,13 +209,8 @@ class Oled(Extension):
             if entry.side != self.split_side and entry.side is not None:
                 del self.entries[idx]
 
-        self.display = adafruit_displayio_ssd1306.SSD1306(
-            displayio.I2CDisplay(self.i2c, device_address=self.device_address),
-            width=self.width,
-            height=self.height,
-            rotation=180 if self.flip else 0,
-            brightness=self.brightness,
-        )
+        self.display.during_bootup(self.width, self.height, 180 if self.flip else 0)
+        self.display.brightness = self.brightness
 
     def before_matrix_scan(self, sandbox):
         if self.dim_period.tick():
@@ -220,15 +237,15 @@ class Oled(Extension):
 
     def deinit(self, sandbox):
         displayio.release_displays()
-        self.i2c.deinit()
+        self.display.deinit()
 
-    def oled_brightness_increase(self):
+    def display_brightness_increase(self, *args):
         self.display.brightness = clamp(
             self.display.brightness + self.brightness_step, 0, 1
         )
         self.brightness = self.display.brightness  # Save current brightness
 
-    def oled_brightness_decrease(self):
+    def display_brightness_decrease(self, *args):
         self.display.brightness = clamp(
             self.display.brightness - self.brightness_step, 0, 1
         )
@@ -236,7 +253,6 @@ class Oled(Extension):
 
     def dim(self):
         if self.powersave:
-
             if (
                 self.powersave_off_time_ms
                 and ticks_diff(ticks_ms(), self.timer_start)

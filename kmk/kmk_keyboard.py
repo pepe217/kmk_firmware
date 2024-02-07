@@ -66,7 +66,6 @@ class KMKKeyboard:
     matrix_update_queue = []
     _trigger_powersave_enable = False
     _trigger_powersave_disable = False
-    i2c_deinit_count = 0
     _go_args = None
     _processing_timeouts = False
     _resume_buffer = []
@@ -113,21 +112,20 @@ class KMKKeyboard:
         except ValueError:
             if debug.enabled:
                 debug('no such int_coord: ', int_coord)
-
             return None
 
+        key = None
         for layer in self.active_layers:
             try:
                 key = self.keymap[layer][idx]
             except IndexError:
-                key = None
                 if debug.enabled:
                     debug('keymap IndexError: idx=', idx, ' layer=', layer)
 
-            if not key or key == KC.TRNS:
-                continue
+            if key and key != KC.TRNS:
+                break
 
-            return key
+        return key
 
     def _on_matrix_changed(self, kevent: KeyEvent) -> None:
         int_coord = kevent.key_number
@@ -358,7 +356,9 @@ class KMKKeyboard:
                 module.during_bootup(self)
             except Exception as err:
                 debug_error(module, 'during_bootup', err)
-                del self.modules[idx]
+                self.modules[idx] = None
+
+        self.modules[:] = [_ for _ in self.modules if _]
 
         if debug.enabled:
             debug('modules=', [_.__class__.__name__ for _ in self.modules])
@@ -368,7 +368,9 @@ class KMKKeyboard:
                 ext.during_bootup(self)
             except Exception as err:
                 debug_error(ext, 'during_bootup', err)
-                del self.extensions[idx]
+                self.extensions[idx] = None
+
+        self.modules[:] = [_ for _ in self.modules if _]
 
         if debug.enabled:
             debug('extensions=', [_.__class__.__name__ for _ in self.extensions])
@@ -469,10 +471,13 @@ class KMKKeyboard:
         try:
             while True:
                 self._main_loop()
+        except Exception as err:
+            debug_error(self, 'Unexpected error', err)
         finally:
-            debug('Unexpected error: cleaning up')
+            debug('cleaning up...')
             self._deinit_hid()
             self.deinit()
+            debug('...done')
 
     def _init(
         self,
