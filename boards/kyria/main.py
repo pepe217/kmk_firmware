@@ -167,10 +167,10 @@ keyboard.keymap = [
     ],
     # 1 - keypad/function
     [
-        KC.TRNS,  KC.PSLS, KC.N7, KC.N8,   KC.N9,   KC.PMNS,                                        KC.HOME, KC.F1,   KC.F2,  KC.F3,  KC.F4,  KC.PSCR,
-        KC.TRNS,  KC.PAST, KC.N4, KC.N5,   KC.N6,   KC.PPLS,                                        KC.END,  KC.F5,   KC.F6,  KC.F7,  KC.F8,  KC.PGUP,
-        KC.TRNS,  KC.PEQL, KC.N1, KC.N2,   KC.N3,   KC.ENT,  KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.TRNS, KC.F9,   KC.F10, KC.F11, KC.F12, KC.PGDN,
-                                  KC.P0,   KC.PDOT, KC.BSPC, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.LALT, KC.TRNS, KC.TRNS
+        KC.TRNS,  KC.F1, KC.F2,  KC.F3,   KC.F4,   KC.HOME,                                        KC.PSLS, KC.N7,   KC.N8, KC.N9, KC.PMNS, KC.PSCR,
+        KC.TRNS,  KC.F5, KC.F6,  KC.F7,   KC.F8,   KC.END,                                         KC.PAST, KC.N4,   KC.N5, KC.N6, KC.PPLS, KC.PGUP,
+        KC.TRNS,  KC.F9, KC.F10, KC.F11,  KC.F12,  KC.TRNS, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.PEQL, KC.N1,   KC.N2, KC.N3, KC.NC,   KC.PGDN,
+                                 KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.P0,   KC.TRNS, KC.PDOT
     ],
     # 2 - symbols
     [
