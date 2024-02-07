@@ -154,6 +154,9 @@ paste_xls = simple_key_sequence(
 lpbk = KC.TD(KC.LPRN, KC.LBRC)
 rpbk = KC.TD(KC.RPRN, KC.RBRC)
 curly = KC.TD(KC.LCBR, KC.RCBR)
+comm = KC.TD(KC.COMM, KC.LABK)
+dot = KC.TD(KC.DOT, KC.RABK)
+slash = KC.TD(KC.SLSH, KC.QUES)
 # lv = LabviewMacros(KC)
 a = KC.HT(KC.A, KC.LSHIFT,)
 h = KC.HT(KC.H, KC.LSHIFT,)
@@ -161,9 +164,9 @@ keyboard.keymap = [
     # 0 - base
     [
         ALTOS, KC.B,  KC.Y, KC.O,    KC.U,   QUOTS,                                                  COLON,   KC.L,   KC.D,   KC.W, KC.V, KC.Z,
-        CTLOS, KC.C,  KC.I, KC.E,    a,      KC.COMM,                                                KC.DOT,  h,      KC.T,   KC.S, KC.N, KC.Q,
+        CTLOS, KC.C,  KC.I, KC.E,    a,      comm,                                                   dot,     h,      KC.T,   KC.S, KC.N, KC.Q,
         GUIOS, KC.G,  KC.X, KC.J,    KC.K,   lpbk,    KC.OS(KC.MO(2)), KC.TG(1),  SFTOS,    KC.MINS, rpbk,    KC.R,   KC.M,   KC.F, KC.P, KC.CW,
-                            curly,   KC.ESC, KC.BSPC, KC.TAB,          EQLADD,    KC.TG(3), KC.ENT,  KC.SPC,  KC.DEL, KC.SLSH 
+                            curly,   KC.ESC, KC.BSPC, KC.TAB,          EQLADD,    KC.TG(3), KC.ENT,  KC.SPC,  KC.DEL, slash 
     ],
     # 1 - keypad/function
     [
