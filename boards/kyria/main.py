@@ -83,10 +83,10 @@ combos.combos = [
 keyboard.keymap = [
     # 0 - base
     [
-        ALTOS, KC.B,  KC.Y, KC.O,    KC.U,   m.QUOTS,                                                  m.COLON,   KC.L,   KC.D,   KC.W, KC.V, KC.Z,
-        CTLOS, KC.C,  KC.I, KC.E,    m.a,      m.comm,                                                   m.dot,     m.h,      KC.T,   KC.S, KC.N, KC.Q,
-        m.GUIOS, KC.G,  KC.X, KC.J,    KC.K,   m.lpbk,    KC.OS(KC.MO(2)), KC.TG(1),  SFTOS,    KC.MINS, m.rpbk,    KC.R,   KC.M,   KC.F, KC.P, KC.CW,
-                            m.curly,   m.EQLADD, KC.BSPC, KC.ESC,          KC.TAB,    KC.OS(KC.MO(3)), KC.ENT,  KC.SPC,  KC.DEL, m.slash 
+        ALTOS,  KC.B,  KC.Y, KC.O,    KC.U,     m.QUOTS,                                                       m.COLON,   KC.L,   KC.D,   KC.W, KC.V, KC.Z,
+        CTLOS,  KC.C,  KC.I, KC.E,    m.a,      m.comm,                                                        m.dot,     m.h,    KC.T,   KC.S, KC.N, KC.Q,
+        m.GUIOS, KC.G, KC.X, KC.J,    KC.K,     m.lpbk,  KC.OS(KC.MO(2)), KC.TG(1),  SFTOS,           KC.MINS, m.rpbk,    KC.R,   KC.M,   KC.F, KC.P, KC.CW,
+                             m.curly, m.EQLADD, KC.BSPC, KC.ESC,          KC.TAB,    KC.OS(KC.MO(3)), KC.ENT,  KC.SPC,    KC.DEL, m.slash 
     ],
     # 1 - keypad/function
     [
@@ -104,10 +104,10 @@ keyboard.keymap = [
     ],
     # 3 - navigation
     [
-        KC.LCTL(KC.L), KC.NO,   KC.NO,         KC.NO,         KC.NO,         m.newtab,                                         KC.TRNS, KC.LSFT(KC.LGUI(KC.UP)), KC.LSFT(KC.LGUI(KC.DOWN)), KC.LSFT(KC.LGUI(KC.RGHT)), KC.LSFT(KC.LGUI(KC.LEFT)), KC.LCTL(KC.L),  
-        KC.LCTL(KC.Z), KC.EFT, KC.RGHT,       KC.DOWN,       KC.UP,         m.rename,                                         KC.TRNS, KC.LCTL(KC.C),           KC.NO,                     KC.F4,                     KC.NO,                     KC.LALT(KC.TAB),  
-        KC.TRNS,       m.undo,    KC.LCTL(KC.X), KC.LCTL(KC.C), m.paste,         m.pastee,  KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.TRNS, m.maximize,                KC.LGUI(KC.DOWN),          KC.LGUI(KC.RGHT),          KC.LGUI(KC.LEFT),          KC.LCTL(KC.Z),  
-                                               m.undtab,        KC.LCTL(KC.V), KC.TRNS, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,                 KC.TRNS  
+        KC.TRNS, m.MAXWIN,  m.RHTWIN, m.LFTWIN, m.NEWTAB, m.UNDTAB,                                     KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+        KC.TRNS, m.G1,     m.G2,      m.G3,     m.G4,     m.G5,                                         m.G6,    m.G7,    m.G8,    m.G9,    KC.TRNS, KC.TRNS,  
+        KC.TRNS, m.UNDO,   m.CUT,     m.COPY,   m.PASTE,  m.NWTABP, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
+                                      KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS
     ],
 ]
 

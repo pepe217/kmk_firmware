@@ -13,7 +13,7 @@ class CommonMacros:
         self.UNDTAB = KC.LSFT(KC.LCLT(KC.T)),
         self.QUOTS = KC.TD(KC.QUOT, KC.DQT)
         #paste and enter
-        self.pastee = simple_key_sequence(
+        self.PASTEE = simple_key_sequence(
             (
                 KC.LCTL(KC.V),
                 KC.ENT,
@@ -21,14 +21,17 @@ class CommonMacros:
         ) 
         self.PASTE = KC.LCTL(KC.V)
         self.UNDO = KC.LCTL(KC.Z)
+        self.CUT = KC.LCTL(KC.X)
+        self.COPY = KC.LCTL(KC.C)
         # open new tab, paste and enter
-        self.NEWTAB = simple_key_sequence(
+        self.NWTABP = simple_key_sequence(
             (
                 KC.LCTL(KC.T),
                 KC.LCTL(KC.V),
                 KC.ENT,
             )
         )
+        self.NEWTAB = KC.LCTL(KC.T)
         self.MAXWIN = KC.LGUI(KC.UP)
         self.RHTWIN = KC.LGUI(KC.UP)
         self.LFTWIN = KC.LGUI(KC.UP)
@@ -40,3 +43,11 @@ class CommonMacros:
         self.SLASH = KC.TD(KC.SLSH, KC.QUES)
         self.A = KC.HT(KC.A, KC.LSHIFT)
         self.H = KC.HT(KC.H, KC.LSHIFT)
+        self.G1 = KC.LGUI(KC.N1)
+        self.G2 = KC.LGUI(KC.N2)
+        self.G3 = KC.LGUI(KC.N3)
+        self.G4 = KC.LGUI(KC.N5)
+        self.G6 = KC.LGUI(KC.N6)
+        self.G7 = KC.LGUI(KC.N7)
+        self.G8 = KC.LGUI(KC.N8)
+        self.G9 = KC.LGUI(KC.N9)
