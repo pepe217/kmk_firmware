@@ -84,16 +84,16 @@ keyboard.keymap = [
     # 0 - base
     [
         ALTOS,  KC.B,  KC.Y, KC.O,    KC.U,     m.QUOTS,                                                       m.COLON,   KC.L,   KC.D,   KC.W, KC.V, KC.Z,
-        CTLOS,  KC.C,  KC.I, KC.E,    m.a,      m.comm,                                                        m.dot,     m.h,    KC.T,   KC.S, KC.N, KC.Q,
-        m.GUIOS, KC.G, KC.X, KC.J,    KC.K,     m.lpbk,  KC.OS(KC.MO(2)), KC.TG(1),  SFTOS,           KC.MINS, m.rpbk,    KC.R,   KC.M,   KC.F, KC.P, KC.CW,
-                             m.curly, m.EQLADD, KC.BSPC, KC.ESC,          KC.TAB,    KC.OS(KC.MO(3)), KC.ENT,  KC.SPC,    KC.DEL, m.slash 
+        CTLOS,  KC.C,  KC.I, KC.E,    m.A,      m.COMM,                                                        m.DOT,     m.H,    KC.T,   KC.S, KC.N, KC.Q,
+        m.GUIOS, KC.G, KC.X, KC.J,    KC.K,     m.LPBK,  KC.OS(KC.MO(2)), KC.TG(1),  SFTOS,           KC.MINS, m.RPBK,    KC.R,   KC.M,   KC.F, KC.P, KC.CW,
+                             m.CURLY, m.EQLADD, KC.BSPC, KC.ESC,          KC.TAB,    KC.OS(KC.MO(3)), KC.ENT,  KC.SPC,    KC.DEL, m.SLASH 
     ],
     # 1 - keypad/function
     [
-        KC.TRNS,  KC.F1, KC.F2,  KC.F3,   KC.F4,   KC.PGDN,                                        KC.PSLS, KC.N7,   KC.N8, KC.N9, KC.PMNS, KC.PSCR,
-        KC.TRNS,  KC.F5, KC.F6,  KC.F7,   KC.F8,   KC.PGUP,                                         KC.PAST, KC.N4,   KC.N5, KC.N6, KC.PPLS, KC.PGUP,
-        KC.TRNS,  KC.F9, KC.F10, KC.F11,  KC.F12,  KC.TRNS, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.PEQL, KC.N1,   KC.N2, KC.N3, KC.NC,   KC.PGDN,
-                                 KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,    KC.TRNS, KC.TRNS, KC.P0,   KC.TRNS, KC.PDOT
+        KC.TRNS,  KC.F1, KC.F2,  KC.F3,    KC.F4,   KC.PGDN,                                        KC.PSLS, KC.N7,   KC.N8, KC.N9, KC.PMNS, KC.HOME,
+        KC.TRNS,  KC.F5, KC.F6,  KC.F7,    KC.F8,   KC.PGUP,                                        KC.PAST, KC.N4,   KC.N5, KC.N6, KC.PPLS, KC.END,
+        KC.TRNS,  KC.F9, KC.F10, KC.F11,   KC.F12,  m.SALTAB, m.SCTLAB, KC.TRNS,  KC.TRNS, KC.TRNS, KC.PEQL, KC.N1,   KC.N2, KC.N3, KC.NC,   KC.PSCR,
+                                 KC.TRNS,  KC.LEFT, KC.RGHT,  KC.DOWN,  KC.UP,    KC.TRNS, KC.TRNS, KC.P0,   KC.TRNS, KC.PDOT
     ],
     # 2 - symbols
     [
@@ -102,12 +102,12 @@ keyboard.keymap = [
         KC.PIPE, KC.BSLS, KC.COLN, KC.SCLN, KC.MINUS, KC.LBRC,  KC.NO,   KC.TRNS,   KC.TRNS, KC.CW,   KC.RBRC, KC.UNDS,  KC.COMMA, KC.DOT,  KC.SLASH, KC.QUES,  
                                    KC.TRNS, KC.TRNS,  KC.TRNS,  KC.DOWN, KC.UP,     KC.LCBR, KC.RCBR, KC.LEFT, KC.RIGHT, KC.PSCR
     ],
-    # 3 - navigation
+    # 3 - one shot move windows/function
     [
-        KC.TRNS, m.MAXWIN,  m.RHTWIN, m.LFTWIN, m.NEWTAB, m.UNDTAB,                                     KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
-        KC.TRNS, m.G1,     m.G2,      m.G3,     m.G4,     m.G5,                                         m.G6,    m.G7,    m.G8,    m.G9,    KC.TRNS, KC.TRNS,  
-        KC.TRNS, m.UNDO,   m.CUT,     m.COPY,   m.PASTE,  m.NWTABP, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  
-                                      KC.TRNS,  KC.TRNS,  KC.TRNS,  KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS
+        KC.F1,   KC.F2,  KC.F3, KC.F4,   KC.F5,   KC.F6,                                       KC.F7,    KC.F8,    KC.F9,    KC.F10,   KC.F11,   KC.F12,  
+        KC.TRNS, m.G1,   m.G2,  m.G3,    m.G4,    m.G5,                                        m.G6,     m.G7,     m.G8,     m.G9,     KC.TRNS,  KC.TRNS,  
+        KC.TRNS, m.UNDO, m.CUT, m.COPY,  m.PASTE, m.ALTAB, m.CTLAB, KC.TRNS, KC.TRNS, KC.TRNS, m.UNDTAB, m.NEWTAB, m.LFTWIN, m.RHTWIN, m.MAXWIN, KC.TRNS,  
+                                KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS
     ],
 ]
 
