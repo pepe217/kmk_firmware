@@ -1,12 +1,10 @@
 from kmk.kmk_keyboard import KMKKeyboard as _KMKKeyboard
 from kmk.quickpin.pro_micro.sparkfun_promicro_rp2040 import pinout as pins
 from kmk.scanners import DiodeOrientation
-from kmk.scanners import intify_coordinate as ic
 from storage import getmount
-
+    
 # Using drive names (KYRIAL, KYRIAR) to recognize sides b/c pinout is not symmetrical or mirrored 
 lside = str(getmount('/').label)[-1] == 'L'
-
 class KMKKeyboard(_KMKKeyboard):
     if lside:
         col_pins = (
@@ -35,27 +33,4 @@ class KMKKeyboard(_KMKKeyboard):
     rgb_pixel_pin = pins[0]
     encoder_pin_0 = pins[19]
     encoder_pin_1 = pins[18]
-
-    coord_mapping = []
-    #top row
-    coord_mapping.extend(ic(0, x, 7) for x in range(6,0,-1))
-    coord_mapping.extend(ic(4, x, 7) for x in range(1,7))
-    #second from top
-    coord_mapping.extend(ic(1, x, 7) for x in range(6,0,-1))
-    coord_mapping.extend(ic(5, x, 7) for x in range(1,7))
-    #third from top
-    coord_mapping.extend(ic(2, x, 7) for x in range(6,0,-1))
-    coord_mapping.extend(ic(3, x, 7) for x in range(3,4))
-    coord_mapping.extend(ic(2, x, 7) for x in range(1))
-    coord_mapping.extend(ic(6, x, 7) for x in range(1))
-    coord_mapping.extend(ic(7, x, 7) for x in range(3,4))
-    coord_mapping.extend(ic(6, x, 7) for x in range(1,7))
-    #bottom
-    coord_mapping.extend(ic(3, x, 7) for x in range(4,5))
-    coord_mapping.extend(ic(3, x, 7) for x in range(2,0,-1))
-    coord_mapping.extend(ic(3, x, 7) for x in range(5,6))
-    coord_mapping.extend(ic(3, x, 7) for x in range(1))
-    coord_mapping.extend(ic(7, x, 7) for x in range(1))
-    coord_mapping.extend(ic(7, x, 7) for x in range(5,6))
-    coord_mapping.extend(ic(7, x, 7) for x in range(1,3))
-    coord_mapping.extend(ic(7, x, 7) for x in range(4,5))
+    coord_mapping = [6, 5, 4, 3, 2, 1, 29, 30, 31, 32, 33, 34, 13, 12, 11, 10, 9, 8, 36, 37, 38, 39, 40, 41, 20, 19, 18, 17, 16, 15, 24, 14, 42, 52, 43, 44, 45, 46, 47, 48, 25, 23, 22, 26, 21, 49, 54, 50, 51, 53]
