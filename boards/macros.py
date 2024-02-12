@@ -1,6 +1,8 @@
 from kmk.handlers.sequences import simple_key_sequence
 
+
 class CommonMacros:
+
     def __init__(self, KC):
         self.GUIOS = KC.HT(KC.OS(KC.LM(2, KC.LGUI)), KC.LGUI)
         self.SALTAB = KC.SM(KC.TAB, KC.LALT)
@@ -13,24 +15,20 @@ class CommonMacros:
         self.UNDTAB = KC.LSFT(KC.LCLT(KC.T)),
         self.QUOTS = KC.TD(KC.QUOT, KC.DQT)
         #paste and enter
-        self.PASTEE = simple_key_sequence(
-            (
-                KC.LCTL(KC.V),
-                KC.ENT,
-            )
-        ) 
+        self.PASTEE = simple_key_sequence((
+            KC.LCTL(KC.V),
+            KC.ENT,
+        ))
         self.PASTE = KC.LCTL(KC.V)
         self.UNDO = KC.LCTL(KC.Z)
         self.CUT = KC.LCTL(KC.X)
         self.COPY = KC.LCTL(KC.C)
         # open new tab, paste and enter
-        self.NWTABP = simple_key_sequence(
-            (
-                KC.LCTL(KC.T),
-                KC.LCTL(KC.V),
-                KC.ENT,
-            )
-        )
+        self.NWTABP = simple_key_sequence((
+            KC.LCTL(KC.T),
+            KC.LCTL(KC.V),
+            KC.ENT,
+        ))
         self.NEWTAB = KC.LCTL(KC.T)
         self.MAXWIN = KC.LGUI(KC.UP)
         self.RHTWIN = KC.LGUI(KC.RGHT)
