@@ -8,7 +8,7 @@ from kmk.modules.capsword import CapsWord
 from kmk.modules.split import Split, SplitType
 from kmk.modules.oneshot import OneShot
 from kmk.modules.mouse_keys import MouseKeys
-from kmk.modules.combos import Chord, Combos, Sequence
+from kmk.modules.combos import Chord, Combos
 from kmk.modules.sticky_mod import StickyMod
 from storage import getmount
 from macros import CommonMacros
