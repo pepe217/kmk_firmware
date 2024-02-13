@@ -13,5 +13,5 @@ class KMKeyboard(_KMKKeyboard):
         board.GPIO11, board.GPIO4, board.GPIO3, board.GPIO2, board.GPIO1,
         board.GPIO20, board.GPIO21
     ]
-    led_pin = board.GPIO0
     diode_orientation = DiodeOrientation.COL2ROW
+    pixel_pin = board.GPIO0
