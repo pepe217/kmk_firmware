@@ -5,13 +5,13 @@ import board
 
 class KMKeyboard(_KMKKeyboard):
     row_pins = [
-        board.GPIO18, board.GPIO6, board.GPIO7, board.GPIO8, board.GPIO9,
-        board.GPIO10, board.GPIO28, board.GPIO27, board.GPIO26, board.GPIO22,
-        board.GPIO19, board.GPIO5, board.GPIO12, board.GPIO13, board.GPIO24
+        board.GP18, board.GP6, board.GP7, board.GP8, board.GP9, board.GP10,
+        board.GP28_A2, board.GP27_A1, board.GP26_A0, board.GP22, board.GP19,
+        board.GP5, board.GP12, board.GP13, board.GP24
     ]
     col_pins = [
-        board.GPIO11, board.GPIO4, board.GPIO3, board.GPIO2, board.GPIO1,
-        board.GPIO20, board.GPIO21
+        board.GP11, board.GP4, board.GP3, board.GP2, board.GP1, board.GP20,
+        board.GP21
     ]
     diode_orientation = DiodeOrientation.COL2ROW
-    pixel_pin = board.GPIO0
+    rgb_pixel_pin = board.GP0

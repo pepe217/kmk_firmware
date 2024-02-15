@@ -7,11 +7,11 @@ from kmk.extensions.rgb import RGB
 from kmk.extensions.lock_status import LockStatus
 
 keyboard = KMKeyboard()
-# rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin,
-#           num_pixels=4,
-#           hue_default=0,
-#           sat_default=0,
-#           val_default=0)
+rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin,
+          num_pixels=4,
+          hue_default=0,
+          sat_default=0,
+          val_default=0)
 
 # class LEDLockStatus(LockStatus):
 
@@ -48,7 +48,7 @@ keyboard = KMKeyboard()
 #             # need to manually force a refresh
 #             rgb.show()
 
-# keyboard.extensions.append(rgb)
+keyboard.extensions.append(rgb)
 # keyboard.extensions.append(LEDLockStatus)
 
 # *2 for split keyboards, which will typically manage twice the number of keys
