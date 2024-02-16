@@ -1,4 +1,6 @@
+from typing import Any
 from kmk.scanners import DiodeOrientation
+from kmk.scanners.keypad import MatrixScanner
 from kmk.kmk_keyboard import KMKKeyboard as _KMKKeyboard
 import board
 
@@ -13,5 +15,9 @@ class KMKeyboard(_KMKKeyboard):
         board.GP11, board.GP4, board.GP3, board.GP2, board.GP1, board.GP20,
         board.GP21
     ]
-    diode_orientation = DiodeOrientation.COL2ROW
     rgb_pixel_pin = board.GP0
+
+    def __init__(self) -> None:
+        self.matrix = MatrixScanner(column_pins=self.col_pins,
+                                    row_pins=self.row_pins,
+                                    columns_to_anodes=DiodeOrientation.COL2ROW)
