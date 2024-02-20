@@ -87,10 +87,10 @@ combos.combos = [
 keyboard.keymap = [
     # 0 - base
     [
-        ALTOS,  KC.B,  KC.Y, KC.O,    KC.U,     m.QUOTS,                                                       m.COLON,   KC.L,   KC.D,   KC.W, KC.V, KC.Z,
-        CTLOS,  KC.C,  KC.I, KC.E,    m.A,      m.COMM,                                                        m.DOT,     m.H,    KC.T,   KC.S, KC.N, KC.Q,
+        CTLOS,  KC.B,  KC.Y, KC.O,    KC.U,     m.QUOTS,                                                       m.COLON,   KC.L,   KC.D,   KC.W, KC.V, KC.Z,
+        ALTOS,  KC.C,  KC.I, KC.E,    m.A,      m.COMM,                                                        m.DOT,     m.H,    KC.T,   KC.S, KC.N, KC.Q,
         m.GUIOS, KC.G, KC.X, KC.J,    KC.K,     m.LPBK,  KC.OS(KC.MO(2)), KC.TG(1),  SFTOS,           KC.MINS, m.RPBK,    KC.R,   KC.M,   KC.F, KC.P, KC.CW,
-                             m.CURLY, m.EQLADD, KC.BSPC, KC.ESC,          KC.TAB,    KC.OS(KC.MO(3)), KC.ENT,  KC.SPC,    KC.DEL, m.SLASH
+                             m.CURLY, m.EQLADD, KC.BSPC, KC.CAPS,         KC.TAB,    KC.OS(KC.MO(3)), KC.ENT,  KC.SPC,    KC.DEL, m.SLASH
     ],
     # 1 - keypad/function
     [
@@ -109,9 +109,9 @@ keyboard.keymap = [
     # 3 - one shot move windows/function
     [
         KC.F1,   KC.F2,  KC.F3, KC.F4,   KC.F5,   KC.F6,                                       KC.F7,    KC.F8,    KC.F9,    KC.F10,   KC.F11,   KC.F12,
-        KC.TRNS, m.G1,   m.G2,  m.G3,    m.G4,    m.G5,                                        m.G6,     m.G7,     m.G8,     m.G9,     KC.TRNS,  KC.TRNS,
-        KC.TRNS, m.UNDO, m.CUT, m.COPY,  m.PASTE, m.ALTAB, m.CTLAB, KC.TRNS, KC.TRNS, KC.TRNS, m.UNDTAB, m.NEWTAB, m.LFTWIN, m.RHTWIN, m.MAXWIN, KC.TRNS,
-                                KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS,  KC.TRNS,  KC.TRNS
+        KC.TRNS, m.G1,   m.G2,  m.G3,    m.G4,    m.G5,                                        m.G6,     m.G7,     m.G8,     m.G9,     KC.TRNS,  m.MAXWIN,
+        KC.TRNS, m.UNDO, m.CUT, m.COPY,  m.PASTE, m.ALTAB, m.CTLAB, KC.TRNS, KC.TRNS, KC.TRNS, m.UNDTAB, m.NEWTAB, m.LFTWIN, m.RHTWIN, m.SLFTWN, m.SRHTWN,
+                                m.CTLSC, m.CTLSV, KC.TRNS, KC.TRNS, KC.TRNS, KC.TRNS, m.SFTINS, KC.TRNS,  KC.TRNS,  KC.TRNS
     ],
 ]
 # yapf: enable
